@@ -1,6 +1,8 @@
-_[your product name]_ Development Report
+"Falta te sempre aquele amigo que desmarca à ultima da hora? Não te preocupes, com xxxx fazemos com que o jogo não seja adiado ou cancelado.
+Lança convites na app para outras pessoas  se juntarem  nas mais diversas modalidades que temos à tua disposição.
+Basta escolheres a modalidade, hora, local e diverte -te."
 
-Welcome to the documentation pages of the _[your product name]_!
+
 
 You can find here details about the product (or mini-app or module), from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of Rational Unified Process): 
 
