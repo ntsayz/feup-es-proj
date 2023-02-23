@@ -28,7 +28,11 @@ Please contact us!
 
 Thank you!
 
-*team members names*
+Ana Raquel Rodrigues dos Reis
+Gonçalo Nuno Leitão Pinho da Costa
+Letícia Mendes Coelho
+Ntsay Zacarias
+Treasure A. Langa
 
 ---
 
