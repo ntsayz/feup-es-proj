@@ -1,6 +1,6 @@
 "Falta te sempre aquele amigo que desmarca à ultima da hora? Não te preocupes, com xxxx fazemos com que o jogo não seja adiado ou cancelado.
 Lança convites na app para outras pessoas  se juntarem  nas mais diversas modalidades que temos à tua disposição.
-Basta escolheres a modalidade, hora, local e diverte -te."
+Basta escolheres a modalidade, hora, local e diverte-te."
 
 
 
