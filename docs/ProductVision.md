@@ -18,8 +18,11 @@ Convites – conforme os desportos pré-selecionados pelo utilizador, este receb
 Botão de interação – botão que irá servir para confirmar a presença de um usuário num certo evento. Apenas pode haver um dado número de confirmações por evento sendo este número pré-definido anteriormente.
 
 Chat entre elementos – chat criado entre o grupo de utilizadores que concordou participar no evento.
+
 Botão de anulação de presença – botão que irá servir para alertar o criador do evento que perdeu um dos participantes e que posteriormente irá ser libertada mais uma vaga.
+
 Perfil de empresas – cada complexo desportivo/ginásio pode ter um perfil na app para criar publicações onde informem os utilizadores da possibilidade de reserva do seu espaço.
+
 Google Maps dentro da app – página onde posso ver encontros que irão decorrer num futuro próximo e cada um deles marcado com um pin no mapa.
 
 
