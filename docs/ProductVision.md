@@ -3,28 +3,23 @@
 
 ### Vision Statement
 
-
-
-**We favor a catchy and concise statement, ideally one sentence.**
-
-We suggest you use the product vision template described in the following link:
-* [How To Create A Convincing Product Vision To Guide Your Team, by uxstudioteam.com](https://uxstudioteam.com/ux-blog/product-vision/)
-
-To learn more about how to write a good product vision, please see also:
-* [Product Management: Product Vision, by ProductPlan](https://www.productplan.com/glossary/product-vision/)
-* [Vision, by scrumbook.org](http://scrumbook.org/value-stream/vision.html)
-* [How to write a vision, by dummies.com](https://www.dummies.com/business/marketing/branding/how-to-write-vision-and-mission-statements-for-your-brand/)
-* [20 Inspiring Vision Statement Examples (2019 Updated), by lifehack.org](https://www.lifehack.org/articles/work/20-sample-vision-statement-for-the-new-startup.html)
-
+Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com XXXXXX fazemos com que o jogo não seja adiado ou cancelado.
+Lança convites na app para outras pessoas se juntarem nas mais diversas modalidades que temos à tua disposição.
+Basta escolheres a modalidade, hora, local e diverte-te.
 
 ### Main Features
-Indicate an  initial/tentative list of high-level features - high-level capabilities or desired services of the system that are necessary to deliver benefits to the users (cf. RUP).
- - Feature 1 - Short description
- - Feature 2 - Short description
-...
+
+ID pessoal – contém informações sobre o usurário (ex. username, e-mail, palavra-passe, classificação (média de todas as avaliações dadas por outros utilizadores), número de telemóvel->opcional).
+Desportos individuais – categoriza os diferentes tipos de desportos e atribui um número de participantes consoante o desporto em causa. Para desportos individuais (corrida) não há um limite de participantes; para desportos em equipa (padel, futebol, basquetebol, ginásio, corrida, ciclismo, andebol, hóquei, yoga, pilates) o número de participantes será o máximo estipulado para cada desporto.
+Convites – conforme os desportos pré-selecionados pelo utilizador, este recebe um convite com as informações sobre o horário (intervalos de 30min), a localização (cidade) e o local concreto onde irá ocorrer o evento (Complexo Desportivo X / Ginásio Y) e qual o número de participantes necessários.
+Botão de interação – botão que irá servir para confirmar a presença de um usuário num certo evento. Apenas pode haver um dado número de confirmações por evento sendo este número pré-definido anteriormente.
+Chat entre elementos – chat criado entre o grupo de utilizadores que concordou participar no evento.
+Botão de anulação de presença – botão que irá servir para alertar o criador do evento que perdeu um dos participantes e que posteriormente irá ser libertada mais uma vaga.
+Perfil de empresas – cada complexo desportivo/ginásio pode ter um perfil na app para criar publicações onde informem os utilizadores da possibilidade de reserva do seu espaço.
+Google Maps dentro da app – página onde posso ver encontros que irão decorrer num futuro próximo e cada um deles marcado com um pin no mapa.
+
 
 ### Assumptions and dependencies
-Indicate an  initial/tentative list of assumptions and dependencies 
-
-- Student timetable from sigarra
-- 
+- Internet
+- GoogleMaps
+- Firebase
