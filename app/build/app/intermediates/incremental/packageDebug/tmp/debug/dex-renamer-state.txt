@@ -1,0 +1,4 @@
+#Thu Mar 09 15:52:00 WET 2023
+base.0=C\:\\Users\\gonca\\Desktop\\faculdade\\2 ano 2 semestre\\ES\\trabalho\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
