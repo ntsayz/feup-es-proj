@@ -11,47 +11,97 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  int _selectedIndex = 0;
+
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Text('Home Screen'),
+    const Text('Favorites Screen'),
+    const Text('Profile Screen'),
+    const Text('Settings Screen'),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async{
         //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo TODO: HAS TO BE BETTER IMPLEMENTED
-        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTRO)
+        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)
       },
       child: Scaffold(
-          appBar: CustomAppBar(title: 'Sports App'),
+        extendBody: true,
+          appBar: CustomAppBar(title: ''),
         backgroundColor: Colors.blueGrey,
-        body: ListView(
-          shrinkWrap: false,
-          children: [
-            CustomSearchBar(),
-            Row(
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text("Events nearby"),
-                ),
-                Spacer(),
-                Icon(Icons.location_on),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(5, 20, 30, 20),
-                  child: Text("Porto"), //TODO: Placeholder
-                ),
-              ],
+        body: SafeArea(
+          top: false,
+          child: ListView(
+            shrinkWrap: false,
+            children: [
+              CustomSearchBar(),
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text("Events nearby"),
+                  ),
+                  Spacer(),
+                  Icon(Icons.location_on),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 20, 30, 20),
+                    child: Text("Porto"), //TODO: Placeholder
+                  ),
+                ],
+              ),
+              EventList(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              backgroundColor: Colors.blueGrey,
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-            EventList(),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
           ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.red,
+          unselectedItemColor: Colors.white,
+          onTap: _onItemTapped,
         ),
       ),
     );
   }
 }
 
-class EventList extends StatelessWidget {
+class EventList extends StatefulWidget {
   const EventList({
     super.key,
   });
 
+  @override
+  State<EventList> createState() => _EventListState();
+}
+
+class _EventListState extends State<EventList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -111,6 +161,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+
+
 
 class CustomSearchBar extends StatelessWidget {
   @override
