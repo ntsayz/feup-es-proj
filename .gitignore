@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase related files
+app/android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+GoogleService-Info.plist
+google-services.json
+# Plugins (already resolved through pubspec.yaml)
+app/.flutter-plugins

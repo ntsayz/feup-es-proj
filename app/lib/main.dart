@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'home.dart';
 
 void main() {
@@ -115,3 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 }
+
+await Firebase.initializeApp(
+options: DefaultFirebaseOptions.currentPlatform,
+);
