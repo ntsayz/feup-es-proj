@@ -4,15 +4,18 @@ import 'firebase_options.dart';
 import 'home.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
       routes: {
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.grey,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -118,6 +121,4 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-await Firebase.initializeApp(
-options: DefaultFirebaseOptions.currentPlatform,
-);
+
