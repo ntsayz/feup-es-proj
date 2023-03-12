@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1005015302828",
+    "project_id": "es-t3-g5-sports-app",
+    "storage_bucket": "es-t3-g5-sports-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005015302828:android:063a9fde91816010db5509",
+        "android_client_info": {
+          "package_name": "com.example.trabalho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005015302828-guuvifd9s8vk06rrqq8b5qgjpp79b0sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCEGZSd2CrOqi5C9T5Q_s9_acIGnxN6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005015302828-guuvifd9s8vk06rrqq8b5qgjpp79b0sc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1005015302828-tjrl3t6bhb63g9af62o1p4c8ngehff9q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trabalho"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
