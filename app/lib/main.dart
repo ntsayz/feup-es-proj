@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:trabalho/profile_screen.dart';
+import 'package:trabalho/new_user.dart';
 
 
 void main() {
@@ -182,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen>{
             alignment: Alignment.center,
             child: InkWell(
               child: const Text("DON'T HAVE A USER YET"),
-   /*to be change to new user */           onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ProfileScreen())),
+   /*to be change to new user */           onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewUser())),
 
             )
 
