@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:trabalho/profile_screen.dart';
 import 'package:trabalho/new_user.dart';
+import 'package:trabalho/reset_password.dart';
 
 
 void main() {
@@ -100,6 +101,8 @@ class _LoginScreenState extends State<LoginScreen>{
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 130,),
+
           const Text("Enter your mail"),
           TextField(
             controller: _emailController,
@@ -126,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen>{
           ),
           InkWell(
             child: Text ("FORGOT YOUR PASSWORD?"),
-  /* to be changed to new passord screen */          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ProfileScreen())),
+  /* to be changed to new passord screen */          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ResetScreen())),
 
           ),
 
@@ -177,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen>{
             )
             ,),
           const SizedBox(
-            height: 100,
+            height: 130,
           ),
           Align(
             alignment: Alignment.center,
@@ -190,6 +193,7 @@ class _LoginScreenState extends State<LoginScreen>{
           )
         ],
       ),
+
 
 
     );

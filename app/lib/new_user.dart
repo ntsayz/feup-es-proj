@@ -134,6 +134,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   context: context);
               print(user);
 
+
               if (_passwordController2.text == _passwordController.text) {
                 if (user != null) {
                   /* to be changed top main screen*/ Navigator.of(context)
@@ -150,7 +151,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
                       child:
                       Row(
                           children: [
-                            const SizedBox( width: 35,),
                             Expanded(child: Row(
                               children: const [
                                 Text("Password must be more than 6 characters", style: TextStyle(fontSize: 18, color: Colors.white),)
@@ -165,7 +165,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   elevation: 0,
                 ));
               }
-
 
 
               else if (_passwordController2.text != _passwordController.text){
@@ -191,6 +190,8 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   elevation: 0,
                 ));
               }
+
+
 
               else{
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
