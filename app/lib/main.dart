@@ -128,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen>{
             height: 20,
           ),
           InkWell(
-            child: Text ("FORGOT YOUR PASSWORD?"),
-  /* to be changed to new passord screen */          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ResetScreen())),
+            child: const Text ("FORGOT YOUR PASSWORD?", style: TextStyle(color: Colors.blueAccent),),
+            onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ResetScreen())),
 
           ),
 
@@ -185,8 +185,8 @@ class _LoginScreenState extends State<LoginScreen>{
           Align(
             alignment: Alignment.center,
             child: InkWell(
-              child: const Text("DON'T HAVE A USER YET"),
-   /*to be change to new user */           onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewUser())),
+              child: const Text("DON'T HAVE A USER YET", style: TextStyle(color: Colors.blueAccent),),
+              onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewUser())),
 
             )
 

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trabalho/main.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _ResetScreenState extends State<ResetScreen> {
           const Padding(padding: EdgeInsets.all(20.0),
             child: Text("Enter your mail"),),
 
-            TextField(
+            TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -46,7 +47,29 @@ class _ResetScreenState extends State<ResetScreen> {
     ),
     onPressed: () async {
       auth.sendPasswordResetEmail(email: _emailController.text);
-      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Container(
+            height: 90,
+            decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            child:
+            Row(
+                children: [
+                  const SizedBox( width: 35,),
+                  Expanded(child: Row(
+                    children: const [
+                      Text("Email sent ", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                    ],
+                  ) )
+                ]
+            )
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      )
+      );
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
 
     },
       elevation: 0.0,

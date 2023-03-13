@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trabalho/main.dart';
 
 import 'package:trabalho/profile_screen.dart';
 
@@ -22,10 +23,12 @@ class _NewUserState extends State<NewUser> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
+          appBar: AppBar(title: const Text("CREATE YOUR USER")),
       body: FutureBuilder(
         future: _initializeFirebase(),
         builder: (context, snapshot){
           if (snapshot.connectionState == ConnectionState.done){
+            const Test();
             return NewUserScreen();
           }
           return const Center(child: CircularProgressIndicator(),
@@ -78,13 +81,15 @@ class _NewUserScreenState extends State<NewUserScreen> {
     TextEditingController _passwordController2 = TextEditingController();
 
 
+
+
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all (16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Enter your email"),
+            const Text("Enter your email"),
         TextField(
         controller: _emailController,
         keyboardType: TextInputType.emailAddress,
@@ -118,7 +123,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
               )
           ),
         const SizedBox(
-          height: 10,
+          height: 30,
         ),
         SizedBox(
           width: double.infinity,
@@ -139,7 +144,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                 if (user != null) {
                   /* to be changed top main screen*/ Navigator.of(context)
                       .pushReplacement(MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()));
+                      builder: (context) => const MyApp()));
                 }
               }
 
@@ -239,4 +244,24 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
     return const Placeholder();
   }
+}
+
+class Test extends StatelessWidget{
+  const Test({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("CREATE YOUR USER")),
+      body:Column(
+        children: const [
+          Text("THIS IS IT"),
+        ],
+      ) ,);
+
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
 }
