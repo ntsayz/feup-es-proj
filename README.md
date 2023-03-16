@@ -21,3 +21,6 @@ As a user I want to be able to login to the app with my credentials. If I don't 
 
 
 <img width="200" alt="Captura de ecrã 2023-03-16, às 15 51 34" src="https://user-images.githubusercontent.com/93987310/225676002-d8d4a6a1-0d2c-4cbf-a697-29ec9f334402.png">
+
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 15 53 16" src="https://user-images.githubusercontent.com/93987310/225676825-65438809-1681-4454-a891-455314fd7610.png">
