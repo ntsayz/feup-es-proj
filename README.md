@@ -18,4 +18,4 @@ samples, guidance on mobile development, and a full API reference.
 # User Stories
 Story#1
 As a user I want to be able to login to the app with my credentials. If I don't have the credentials and it is the first time using de app, I can create an account.
-<img width="376" alt="Captura de ecrã 2023-03-16, às 15 50 50" src="https://user-images.githubusercontent.com/93987310/225675666-1bc5bc8f-3b7c-4928-abe2-76362ae92fcf.png">
+<img width="150" alt="Captura de ecrã 2023-03-16, às 15 51 34" src="https://user-images.githubusercontent.com/93987310/225676002-d8d4a6a1-0d2c-4cbf-a697-29ec9f334402.png">
