@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 # User Stories
 
-##Story#1
+# Story#1
 
 As a user I want to be able to login to the app with my credentials. If I don't have the credentials and it is the first time using the app, I can create an account.
 
