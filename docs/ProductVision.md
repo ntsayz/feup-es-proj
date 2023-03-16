@@ -3,7 +3,7 @@
 
 ### Vision Statement
 
-Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com XXXXXX fazemos com que o jogo não seja adiado ou cancelado.
+Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com **SportStack** fazemos com que o jogo não seja adiado ou cancelado.
 Lança convites na app para outras pessoas se juntarem nas mais diversas modalidades que temos à tua disposição.
 Basta escolheres a modalidade, hora, local e diverte-te.
 
