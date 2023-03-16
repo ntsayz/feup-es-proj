@@ -1,15 +1,17 @@
--
+
 ## Architecture and Design
 
-This describes the architecture and design of an app that connects people who practice the same sport.The app uses Firebase for the backend, Google API for Geocoding, Geolocation, and Static Maps, Cloud Functions for server-side notification logic, Cloud Messaging to send push notifications to users, and a Real-time database for the real-time messaging system.
+The app uses Firebase for the backend, Google API for Geocoding, Geolocation, and Static Maps. Within Firebase we use Cloud Functions for server-side notification logic, Cloud Messaging to send push notifications to users, a Real-time database for the real-time messaging system and Firestore to store all app wide data.
 
--
+
 ## Logical Architecture
-The user interface is responsible for handling user input and displaying information to the user. The business logic contains the app's core functionality, such as creating events and inviting users. The data access layer is responsible for communicating with the app's backend and storing data.
+ <p align="center" justify="center">
+  <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/images/logical_larch.drawio-3.png"/>
+</p>
 
-[picture]()!
--
 ## Physical Architecture 
-The client devices communicate with the backend servers through the internet. The backend servers communicate with the Google API servers to retrieve information such as maps and location data. The backend servers use Firebase for server-side notification logic and a Real-time database for the real-time messaging system.
+The client devices communicate with the backend servers through the internet. The backend servers communicate with the Google API servers to retrieve information such as maps and location data and Firebase as the database.
+ <p align="center" justify="center">
+  <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/images/PhysicalArchitecture.png"/>
+</p>
 
-[picture]()!
