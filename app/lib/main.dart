@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:trabalho/profile_screen.dart';
+import 'package:trabalho/new_user.dart';
+import 'package:trabalho/reset_password.dart';
+
 
 void main() {
-
   runApp(const MyApp());
 }
 
@@ -12,113 +15,194 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
 
-    return MaterialApp(
-      title: 'Flutter Demo',
-      routes: {
-        '/home': (context) => HomePage(),
-      },
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.grey,
+    return const MaterialApp(
+      home: HomePage(),
+    );
+
+    throw UnimplementedError();
+  }
+
+
+}
+
+class HomePage extends StatefulWidget{
+  const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+
+
+}
+
+class _HomePageState extends State<HomePage>{
+
+  Future<FirebaseApp> _initializeFirebase() async{
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.done){
+            return LoginScreen();
+          }
+          return const Center(child: CircularProgressIndicator(),
+          );
+        },
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class LoginScreen extends StatefulWidget{
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _LoginScreenState extends State<LoginScreen>{
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+
+
+
+
+  static Future<User?> loginUsingEmailPassword({required String email, required String password, required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    try{
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
+      user=userCredential.user;
+    }on FirebaseAuthException catch(e){
+      if (e.code=="user-not-found"){
+        print ("No user found for that email");
+      }
+    }
+    return user;
+
   }
+
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 130,),
+
+          const Text("Enter your mail"),
+          TextField(
+            controller: _emailController,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+                hintText: "USER EMAIL",
+                prefixIcon: Icon(Icons.mail)
             ),
           ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: IconButton(
-              icon: Icon(Icons.message),
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
+          const SizedBox(
+            height: 30,
+          ),
+          const Text("Enter your password"),
+          TextField(
+            obscureText: true,
+            controller: _passwordController,
+            decoration: const InputDecoration(
+                hintText: "PASSWORD",
+                prefixIcon: Icon(Icons.lock)
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          InkWell(
+            child: const Text ("FORGOT YOUR PASSWORD?", style: TextStyle(color: Colors.blueAccent),),
+            onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ResetScreen())),
+
+          ),
+
+          const SizedBox(
+            height: 80,
+          ),
+          Container(
+            width: double.infinity,
+            child: RawMaterialButton(
+              fillColor: Colors.blue,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0)
+              ),
+              onPressed: () async {
+                User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+                print (user);
+
+                if (user!=null){
+                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                }
+                else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Container(
+                        height: 90,
+                        decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        child:
+                        Row(
+                            children: [
+                              const SizedBox( width: 35,),
+                              Expanded(child: Row(
+                                children: const [
+                                  Text("ENTER A VALID COMBINATION", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                                ],
+                              ) )
+                            ]
+                        )
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ));
+                }
               },
-            ),
+              elevation: 0.0,
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: const Text("Login"),
+            )
+            ,),
+          const SizedBox(
+            height: 130,
           ),
+          Align(
+              alignment: Alignment.center,
+              child: InkWell(
+                child: const Text("DON'T HAVE A USER YET", style: TextStyle(color: Colors.blueAccent),),
+                onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewUser())),
+
+              )
+
+          )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+
+
+
     );
 
 
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
+
 
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:math';
 
 
@@ -16,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
-  var username = "ntsayz";
+  var username = "username";
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Text('Home Screen'),
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async{
         //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo TODO: HAS TO BE BETTER IMPLEMENTED
-        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)
+        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)\\\\\\\\\\\\\]
       },
       child: Scaffold(
         extendBody: true,
@@ -48,13 +47,13 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             shrinkWrap: false,
             children: [
-              ProfileArea(),
+              profileArea(),
               CustomSearchBar(),
               Row(
                 children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(25,0,0,0),
-                    child: Text("Eventos perto de ti:",style: TextStyle(fontSize: 16,color: Color(0xFFA0A0A0)),),
+                    child: Text("Eventos nearby:",style: TextStyle(fontSize: 16,color: Color(0xFFA0A0A0)),),
                   ),
                   Spacer(),
                   Icon(Icons.location_on,color:Color(0xFFA0A0A0) ,),
@@ -65,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             EventCards(),
-          createEvent(),
+          const createEvent(),
 
           ],
           ),
@@ -78,21 +77,21 @@ class _HomePageState extends State<HomePage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.sports_soccer_sharp),
-              label: 'Favorites',
+              icon: Icon(Icons.favorite),
+              label: 'My teams',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.location_on_sharp),
               label: 'Location',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: Icon(Icons.sports_handball_sharp),
+              label: 'All places',
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Color(0xFFF6B95D),
-          unselectedItemColor: Color(0xFFA0A0A0),
+          selectedItemColor: const Color(0xFFF6B95D),
+          unselectedItemColor:const  Color(0xFFA0A0A0),
           onTap: _onItemTapped,
         ),
       ),
@@ -108,7 +107,7 @@ class createEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(40,20,40,0),
+      padding: const EdgeInsets.fromLTRB(80,40,80,80),
       child: Card(
         child: SizedBox(
           height: 100,
@@ -117,13 +116,13 @@ class createEvent extends StatelessWidget {
             onPressed: () {
               //do smtg
             },
-            child: Text(
-              'CRIAR EVENTO',
-              style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
-            ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFF6B95D),
+              backgroundColor: const Color(0xFFF6B95D),
               foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              'CREATE EVENT',
+              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -148,7 +147,7 @@ class _EventListState extends State<EventList> {
       padding: const EdgeInsets.fromLTRB(10,0,10,10),
       child: Container(
         decoration:BoxDecoration(
-          color: Color(0xFFF6B95D),
+          color: const Color(0xFFF6B95D),
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: SizedBox(
@@ -165,7 +164,7 @@ class _EventListState extends State<EventList> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    child: ListTile(
+                    child: const ListTile(
                       title: Center(child: Text('Evento',style: TextStyle(color: Color(0xFFA0A0A0)),)), // TODO: remove Center(). the subtitle will prob go as well
                       subtitle: Text(''),
                     ),
@@ -183,7 +182,7 @@ class _EventListState extends State<EventList> {
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  CustomAppBar({required this.title});
+  CustomAppBar({super.key, required this.title});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -197,7 +196,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-Widget ProfileArea() {
+Widget profileArea() {
   return Padding(
     padding: const EdgeInsets.fromLTRB(0,5,20,2),
     child: Row(
@@ -206,25 +205,25 @@ Widget ProfileArea() {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
+            const Text(
               'username',
               style: TextStyle(
                   fontSize: 16.0,color: Color(0xFFA0A0A0)
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.email_outlined,
                     size: 30.0,
                     color: Color(0xFFA0A0A0),
                   ),
                   onPressed: () {},
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
                   child: Image.network(
@@ -248,6 +247,8 @@ Widget ProfileArea() {
 
 
 class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -327,7 +328,7 @@ class _EventCardState extends State<EventCard> {
                     color: _isSelected ? Colors.green : Colors.white10,
                   ),
                   padding: EdgeInsets.all(6.0),
-                  child: Icon(
+                  child: const Icon(
                     Icons.done,
                     color: Colors.white,
                     size: 24.0,
