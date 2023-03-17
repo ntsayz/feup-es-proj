@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
 
 
 
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
+
 
   int _selectedIndex = 0;
 
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
     return WillPopScope(
       onWillPop: () async{
-        //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo TODO: HAS TO BE BETTER IMPLEMENTED
+        //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo
         return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)\\\\\\\\\\\\\]
       },
       child: Scaffold(

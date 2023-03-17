@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:trabalho/profile_screen.dart';
 import 'package:trabalho/new_user.dart';
+import 'package:trabalho/home.dart';
 import 'package:trabalho/reset_password.dart';
 
 
@@ -148,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 print (user);
 
                 if (user!=null){
-                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
                 }
                 else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
