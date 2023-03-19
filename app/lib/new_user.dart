@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:trabalho/main.dart';
 
 import 'package:trabalho/profile_screen.dart';
@@ -22,7 +25,12 @@ class _NewUserState extends State<NewUser> {
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
+      return true;
+    },
+    child: Scaffold(
           appBar: AppBar(title: const Text("CREATE YOUR USER")),
       body: FutureBuilder(
         future: _initializeFirebase(),
@@ -34,7 +42,7 @@ class _NewUserState extends State<NewUser> {
           return const Center(child: CircularProgressIndicator(),
           );
         },
-      ),
+      ),)
     );
   }
 }
@@ -139,16 +147,9 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   context: context);
               print(user);
 
+              final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(_emailController.text);
 
-              if (_passwordController2.text == _passwordController.text) {
-                if (user != null) {
-                  /* to be changed top main screen*/ Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MyApp()));
-                }
-              }
-
-              else if (_passwordController.text.length <=6){
+              if (list.isNotEmpty){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Container(
                       height: 90,
@@ -156,9 +157,10 @@ class _NewUserScreenState extends State<NewUserScreen> {
                       child:
                       Row(
                           children: [
+                            const SizedBox( width: 35,),
                             Expanded(child: Row(
                               children: const [
-                                Text("Password must be more than 6 characters", style: TextStyle(fontSize: 18, color: Colors.white),)
+                                Text("Email already in use", style: TextStyle(fontSize: 18, color: Colors.white),)
 
                               ],
                             ) )
@@ -172,7 +174,56 @@ class _NewUserScreenState extends State<NewUserScreen> {
               }
 
 
-              else if (_passwordController2.text != _passwordController.text){
+    if (_passwordController2.text == _passwordController.text) {
+                if (user != null) {
+
+                  showDialog(context: context,
+
+                    builder: (BuildContext context) { return SimpleDialog(
+                      title: Text("USER CREATED", style: TextStyle(fontSize: 30),),
+                      children: <Widget>[
+                        ButtonTheme(
+                            minWidth: 50,
+                            child:
+                            ElevatedButton(
+                                onPressed: () =>  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp())),
+
+                                child: Text("Back to Login Page"))
+                        ),
+
+                      ],
+
+
+                    ); });
+                  }
+              }
+
+              if (_passwordController.text.length <=6 || _passwordController2.text.length <=6){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Container(
+                    height: 90,
+                    decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    child:
+                    Row(
+                        children: [
+                          const SizedBox( width: 35,),
+                          Expanded(child: Row(
+                            children: const [
+                              Text("Password is too weak", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                            ],
+                          ) )
+                        ]
+                    )
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ));
+              }
+
+              else if (_passwordController.text.length >=6 || _passwordController2.text.length >=6){
+                if (_passwordController2.text != _passwordController.text){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Container(
                       height: 90,
@@ -194,7 +245,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                 ));
-              }
+              }}
 
 
 
