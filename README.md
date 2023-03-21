@@ -95,3 +95,9 @@ As a user I want to be able to create a team, look at my team-stats and the spor
 
 
 
+### Domain model
+
+
+ <p align="center" justify="center">
+  <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/97bbba905bd0aaa1e48f22fefe504c88b13474e4/images/DomainModel.png"/>
+</p>
