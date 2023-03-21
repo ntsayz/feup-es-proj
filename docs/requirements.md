@@ -32,5 +32,5 @@ At the end, it is good to add a rough indication of the value of the user story 
 
 
  <p align="center" justify="center">
-  <img src="https://github.com/FEUP-LEIC-ES-2022-23/templates/blob/main/images/DomainModel.png"/>
+  <img src="2LEIC03T5/images/DomainModel.png"/>
 </p>
