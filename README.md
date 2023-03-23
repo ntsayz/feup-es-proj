@@ -1,19 +1,32 @@
-# SPORTSTACK's Development Report
+# SportStack's Development Report
 
-A new Flutter project.
+Welcome to the documentation pages of **SportStack**!
 
-## Getting Started
+You can find here detailed about the SportStack application, hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report (see [template](https://github.com/softeng-feup/open-cx/blob/master/docs/templates/Development-Report.md)), organized by discipline (as of RUP): 
 
-This project is a starting point for a Flutter application.
+* Business modeling
+  * [Product Vision](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProductVision.md)
+* Requirements
+  * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/edit/main/docs/requirements.md#user-stories)
+  * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/edit/main/docs/requirements.md#domain-model)
+* Architecture and Design
+  * [Logical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#logical-architecture)
+  * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#physical-architecture)
+  * [Prototype (TODO)]()
+* [Implementation (TODO)]()
+* [Configuration and change management (TODO)]()
+* [Project management (TODO)](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProjectManagement.md)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Product Vision
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Vision Statement
+
+Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com **SportStack** fazemos com que o jogo não seja adiado ou cancelado.
+Lança convites na app para outras pessoas se juntarem nas mais diversas modalidades que temos à tua disposição.
+Basta escolheres a modalidade, hora, local e diverte-te.
+
+
 
 # User Stories
 
