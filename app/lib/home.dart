@@ -5,14 +5,14 @@ import 'dart:math';
 
 
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainScreenState extends State<MainScreen> {
 
 
   int _selectedIndex = 0;
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(25,0,0,0),
-                    child: Text("Eventos nearby:",style: TextStyle(fontSize: 16,color: Color(0xFFA0A0A0)),),
+                    child: Text("Events nearby:",style: TextStyle(fontSize: 16,color: Color(0xFFA0A0A0)),),
                   ),
                   Spacer(),
                   Icon(Icons.location_on,color:Color(0xFFA0A0A0) ,),
@@ -287,6 +287,7 @@ class EventCard extends StatefulWidget {
   final String title;
   final String imageUrl;
 
+
   const EventCard({Key? key, required this.title, required this.imageUrl}) : super(key: key);
 
   @override
@@ -295,6 +296,10 @@ class EventCard extends StatefulWidget {
 
 class _EventCardState extends State<EventCard> {
   bool _isSelected = false;
+  int occ = 6;
+  final int cap = 10;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -322,6 +327,11 @@ class _EventCardState extends State<EventCard> {
                 onTap: () {
                   setState(() {
                     _isSelected = !_isSelected;
+                    if(_isSelected){
+                      occ++;
+                    }else{
+                      occ--;
+                    }
                   });
                 },
                 child: Container(
@@ -337,6 +347,11 @@ class _EventCardState extends State<EventCard> {
                   ),
                 ),
               ),
+            ),
+            Positioned(
+              left: 8,
+              bottom: 8,
+              child: Text("$occ/$cap",style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
             ),
 
           ],
