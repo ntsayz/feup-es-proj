@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:trabalho/home.dart';
 import 'package:trabalho/main.dart';
 
 import 'package:trabalho/profile_screen.dart';
+import 'package:trabalho/user_info.dart';
 
 class NewUser extends StatefulWidget {
   const NewUser({Key? key}) : super(key: key);
@@ -36,7 +38,6 @@ class _NewUserState extends State<NewUser> {
         future: _initializeFirebase(),
         builder: (context, snapshot){
           if (snapshot.connectionState == ConnectionState.done){
-            const Test();
             return NewUserScreen();
           }
           return const Center(child: CircularProgressIndicator(),
@@ -176,8 +177,9 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
     if (_passwordController2.text == _passwordController.text) {
                 if (user != null) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString())));
 
-                  showDialog(context: context,
+                 /* showDialog(context: context,
 
                     builder: (BuildContext context) { return SimpleDialog(
                       title: Text("USER CREATED", style: TextStyle(fontSize: 30),),
@@ -194,7 +196,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                       ],
 
 
-                    ); });
+                    ); });*/
                   }
               }
 
@@ -249,7 +251,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
 
 
-              else{
+             /* else{
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Container(
                       height: 90,
@@ -271,7 +273,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                 ));
-              }
+              }*/
             },
             elevation: 0.0,
             padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -295,24 +297,4 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
     return const Placeholder();
   }
-}
-
-class Test extends StatelessWidget{
-  const Test({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(title: const Text("CREATE YOUR USER")),
-      body:Column(
-        children: const [
-          Text("THIS IS IT"),
-        ],
-      ) ,);
-
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
 }

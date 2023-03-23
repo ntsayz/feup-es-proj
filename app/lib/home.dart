@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trabalho/user_info.dart';
 import 'dart:math';
 
 
@@ -116,8 +117,11 @@ class createEvent extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              //do smtg
-            },
+
+
+            }
+
+            ,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF6B95D),
               foregroundColor: Colors.white,
