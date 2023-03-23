@@ -15,3 +15,10 @@ The client devices communicate with the backend servers through the internet. Th
   <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/images/PhysicalArchitecture.png"/>
 </p>
 
+
+## Prototype
+
+This is a brief demonstration of our app's essential features. We've successfully connected Firebase with Flutter, and are utilizing Firebase Authentication to allow users to Register, Log In, and Reset their passwords. On our Home page, users can access their profile information, browse nearby events, and participate in or create new events.
+
+![](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/images/prototype-demo.gif)
+
