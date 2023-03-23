@@ -18,15 +18,6 @@ You can find here detailed about the SportStack application, hereby mentioned as
 * [Project management (TODO)](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProjectManagement.md)
 
 
-## Product Vision
-
-### Vision Statement
-
-Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com **SportStack** fazemos com que o jogo não seja adiado ou cancelado.
-Lança convites na app para outras pessoas se juntarem nas mais diversas modalidades que temos à tua disposição.
-Basta escolheres a modalidade, hora, local e diverte-te.
-
-
 
 # User Stories
 
