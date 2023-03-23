@@ -7,8 +7,8 @@ You can find here detailed about the SportStack application, hereby mentioned as
 * Business modeling
   * [Product Vision](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProductVision.md)
 * Requirements
-  * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/edit/main/docs/requirements.md#user-stories)
-  * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/edit/main/docs/requirements.md#domain-model)
+  * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/requirements.md#user-stories)
+  * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/requirements.md#domain-model)
 * Architecture and Design
   * [Logical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#logical-architecture)
   * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#physical-architecture)
