@@ -1,36 +1,89 @@
+# Requirements
 
-## Requirements
+## User Stories
 
-In this section, you should describe all kinds of requirements for your module: functional and non-functional requirements.
+**Story#1**
 
-### User stories
-The user stories should be created as GitHub issues. Therefore, this section will *not* exist in your report, it is here only to explain how you should describe the requirements of the product as **user stories**. 
+As a user I want to be able to login to the app with my credentials. If I don't have the credentials and it is the first time using the app, I can create an account.
 
-A user story is a description of desired functionality told from the perspective of the user or customer. A starting template for the description of a user story is 
-
-*As a < user role >, I want < goal > so that < reason >.*
-
-User stories should be created and described as [Issues](https://github.com/FEUP-LEIC-ES-2022-23/templates/issues) in GitHub with the label "user story". See how to in the video [Creating a Product Backlog of User Stories for Agile Development using GitHub](https://www.youtube.com/watch?v=m8ZxTHSKSKE).
-
-You should name the issue with the text of the user story, and, in the "comments" field, add any relevant notes, the image(s) of the user interface mockup(s) (see below) and the acceptance test scenarios (see below). 
-
-**INVEST in good user stories**. 
-You may add more details after, but the shorter and complete, the better. In order to decide if the user story is good, please follow the [INVEST guidelines](https://xp123.com/articles/invest-in-good-stories-and-smart-tasks/).
-
-**User interface mockups**.
-After the user story text, you should add a draft of the corresponding user interfaces, a simple mockup or draft, if applicable.
-
-**Acceptance tests**.
-For each user story you should write also the acceptance tests (textually in [Gherkin](https://cucumber.io/docs/gherkin/reference/)), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-**Value and effort**.
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. [MoSCoW](https://en.wikipedia.org/wiki/MoSCoW_method) method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
+**User interface mock-up**
 
 
+**Screen to login**
 
-### Domain model
+<img width="200" alt="Captura de ecrã 2023-03-16, às 15 51 34" src="https://user-images.githubusercontent.com/93987310/225676002-d8d4a6a1-0d2c-4cbf-a697-29ec9f334402.png">
+
+
+**Button to create user**
+
+<img width="158" alt="Captura de ecrã 2023-03-16, às 15 56 27" src="https://user-images.githubusercontent.com/93987310/225678213-a8015a4a-e5f7-4113-a190-cc429e4be20c.png">
+
+
+**Screen to create user**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 15 53 16" src="https://user-images.githubusercontent.com/93987310/225676825-65438809-1681-4454-a891-455314fd7610.png">
+
+
+**Story#2**
+
+As a user I want to be able to create a new event and decide what kind of sport I can play, location, time, and teammates. If I don't want to create a new one, I can join one that already exists.
+
+**User interface mock-up**
+
+
+**HomeScreen**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 16 12 56" src="https://user-images.githubusercontent.com/93987310/225683759-e0978c1a-c997-4d73-9790-862a5d98c177.png">
+
+
+**Button to create an event**
+
+<img width="130" alt="Captura de ecrã 2023-03-16, às 16 15 07" src="https://user-images.githubusercontent.com/93987310/225683980-66ea860e-2ec1-43a4-a7e6-0db2f753210f.png">
+
+
+**Screen to create the event**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 16 15 47" src="https://user-images.githubusercontent.com/93987310/225685375-e238fb11-7052-469e-b8a7-bb89e98e15dc.png">
+
+
+**Story#3**
+
+As a user I want to be able to see what are the best places to do my sport and vote if I like it or not.
+
+**User interface mock-up**
+
+
+**Screen to see all the places**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 16 24 16" src="https://user-images.githubusercontent.com/93987310/225686528-f759e707-946c-4075-accf-54e4d8511384.png">
+
+
+**Story#4**
+
+As a user I want to be able to create a team, look at my team-stats and the sports we usually do. By clicking on my profile picture I can directly access my profile where I can edit my date of birth, the sports I want to practice and my location. 
+
+**User interface mock-up**
+
+
+**Screen to create and see my teams**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 16 55 06" src="https://user-images.githubusercontent.com/93987310/225694766-085bc910-ede7-497a-80aa-beb846b08467.png">
+
+
+
+
+**User Profile**
+
+<img width="200" alt="Captura de ecrã 2023-03-16, às 16 53 41" src="https://user-images.githubusercontent.com/93987310/225694480-c893c8db-d43b-47e7-8148-8dbedea862ea.png">
+
+
+
+
+
+## Domain model
 
 
  <p align="center" justify="center">
   <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/97bbba905bd0aaa1e48f22fefe504c88b13474e4/images/DomainModel.png"/>
 </p>
+
