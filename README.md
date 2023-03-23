@@ -6,7 +6,7 @@ You can find here detailed about the SportStack application, hereby mentioned as
 
 * Business modeling
   * [Product Vision](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProductVision.md)
-  * [Elevator Pitch (TODO]()
+  * [Elevator Pitch (TODO)]()
 * Requirements
   * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/requirements.md#user-stories)
   * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/requirements.md#domain-model)
