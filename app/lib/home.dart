@@ -11,6 +11,7 @@ import 'dart:math';
 class MainScreen extends StatefulWidget {
   final String uid;
   MainScreen({Key? key, required this.uid}) : super(key: key);
+  Map<String, dynamic>? userData;
 
 
   @override
@@ -23,7 +24,9 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   late String fullname = "" ;
   late int phoneNumber = 0;
-  late String username = "hello"  ;
+  late String username = ""  ;
+
+
 
 
  /* static final List<Widget> _widgetOptions = <Widget>[
@@ -65,6 +68,7 @@ class _MainScreenState extends State<MainScreen> {
         fullname = userData['Full name'];
         phoneNumber = userData['Phone number'];
         username = userData['Username'];
+        widget.userData = userData;
       });
     } else {
       //
@@ -148,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
   void Profile(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen(uid:widget.uid,)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen(uid:widget.uid,userData: widget.userData,)));
   }
 }
 

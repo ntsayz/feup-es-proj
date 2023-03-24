@@ -5,8 +5,13 @@ import 'package:trabalho/main.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;
-  const ProfileScreen({Key? key, required this.uid}) : super(key: key);
+  final Map<String, dynamic>? userData;
+  
+  const ProfileScreen({Key? key, required this.uid, required this.userData}) : super(key: key);
 
+
+
+  
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -19,14 +24,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
-            }else{
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid:widget.uid,)));
-            }
           },
         ),
-        title: Text('Profile'),
+        title: Text("Profile"),
       ),
       body: ElevatedButton(
         onPressed: () => _signOut(context),
