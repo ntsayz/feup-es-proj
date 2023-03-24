@@ -28,22 +28,24 @@ class _UserInformationsState extends State<UserInformations> {
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
 
-  DateTime _ShowDatePicker(){
-    DateTime _dateTime = DateTime.now();
+  DateTime _dateTime  = DateTime.now();
 
-    showDatePicker(context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1950),
-        lastDate: DateTime.now()).then((value){
-        setState(() {
-          _dateTime = value!;
-        });
-    });
+  Future<DateTime> _ShowDatePicker() async {
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
 
-    return _dateTime;
+    if (selectedDate != null) {
+      setState(() {
+        _dateTime = selectedDate;
+      });
+    }
+
+    return selectedDate ?? DateTime.now();
   }
-
-
 
 
 
@@ -106,7 +108,7 @@ class _UserInformationsState extends State<UserInformations> {
                     borderRadius: BorderRadius.circular(12.0)
                 ),
                 onPressed: () {
-                    addUserDetails(context, _ShowDatePicker() , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim());
+                    addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim());
 
                 })
 
