@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trabalho/user_info.dart';
+import 'package:trabalho/main.dart';
+import 'package:trabalho/profile_screen.dart';
 import 'dart:math';
 
 
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final String uid;
+  MainScreen({Key? key, required this.uid}) : super(key: key);
+
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -17,15 +21,56 @@ class _MainScreenState extends State<MainScreen> {
 
 
   int _selectedIndex = 0;
+  late String fullname = "" ;
+  late int phoneNumber = 0;
+  late String username = "hello"  ;
 
-  var username = "username";
 
-  static final List<Widget> _widgetOptions = <Widget>[
+ /* static final List<Widget> _widgetOptions = <Widget>[
     const Text('Home Screen'),
     const Text('Favorites Screen'),
     const Text('Profile Screen'),
     const Text('Settings Screen'),
-  ];
+  ];*/
+
+  @override
+  void initState()  {
+    super.initState();
+    if (widget.uid == null || widget.uid.isEmpty) {
+      // Navigate back to the login screen
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    }else{
+        setData();
+    }
+  }
+
+
+
+
+
+  Future<Map<String, dynamic>?> getUserData(String uid) async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('user').doc(uid).get();
+    if (snapshot.exists) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      return data;
+    } else {
+      // handle the case where the document doesn't exist
+      return null;
+    }
+  }
+  void setData() async {
+    Map<String, dynamic>? userData = await getUserData(widget.uid);
+    if (userData != null) {
+      setState(() {
+        fullname = userData['Full name'];
+        phoneNumber = userData['Phone number'];
+        username = userData['Username'];
+      });
+    } else {
+      //
+    }
+  }
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,7 +95,9 @@ class _MainScreenState extends State<MainScreen> {
           child: ListView(
             shrinkWrap: false,
             children: [
-              profileArea(),
+              profileArea(username, () {
+                Profile(context);
+              }),
               CustomSearchBar(),
               Row(
                 children: const [
@@ -100,6 +147,9 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+  void Profile(BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen(uid:widget.uid,)));
+  }
 }
 
 class createEvent extends StatelessWidget {
@@ -119,9 +169,7 @@ class createEvent extends StatelessWidget {
             onPressed: () {
 
 
-            }
-
-            ,
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF6B95D),
               foregroundColor: Colors.white,
@@ -202,19 +250,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-Widget profileArea() {
+Widget profileArea(String username, VoidCallback onProfilePressed) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(0,5,20,2),
+    padding: const EdgeInsets.fromLTRB(0, 5, 20, 2),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Text(
-              'username',
+            Text(
+              "${username ?? "username"}",
               style: TextStyle(
-                  fontSize: 16.0,color: Color(0xFFA0A0A0)
+                fontSize: 16.0,
+                color: Color(0xFFA0A0A0),
               ),
             ),
             const SizedBox(height: 8.0),
@@ -230,13 +279,13 @@ Widget profileArea() {
                   onPressed: () {},
                 ),
                 const SizedBox(width: 8.0),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25.0),
-                  child: Image.network(
-                    'https://picsum.photos/id/64/200',
-                    width: 50.0,
-                    height: 50.0,
-                    fit: BoxFit.cover,
+                InkWell(
+                  onTap: onProfilePressed,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      'https://picsum.photos/id/29/200',
+                    ),
+                    radius: 25.0,
                   ),
                 ),
               ],
@@ -247,6 +296,8 @@ Widget profileArea() {
     ),
   );
 }
+
+
 
 
 

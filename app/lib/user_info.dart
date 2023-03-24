@@ -130,8 +130,7 @@ class _UserInformationsState extends State<UserInformations> {
 
 
 addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user){
-  FirebaseFirestore.instance.collection('user').add({
-    'uid' : uid,
+  FirebaseFirestore.instance.collection('user').doc(uid).set({
     'Birth Date' : date,
     'Full name': name,
     'Phone number' : int.parse(phone),
@@ -140,7 +139,8 @@ addUserDetails (BuildContext context, DateTime date, String uid, String name, St
 
 
 
-  return   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+
+  return   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: uid)));
 
 
   // return Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
