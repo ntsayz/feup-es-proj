@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trabalho/main.dart';
 import 'package:trabalho/profile_screen.dart';
 import 'dart:math';
@@ -12,7 +11,7 @@ class MainScreen extends StatefulWidget {
   final String uid;
   MainScreen({Key? key, required this.uid}) : super(key: key);
   Map<String, dynamic>? userData;
-  Future<Map<String, dynamic>>? _eventsDataFuture;
+
   late List<Map<String, dynamic>> _dataList = [];
 
 
@@ -42,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState()  {
     super.initState();
-    if (widget.uid == null || widget.uid.isEmpty) {
+    if (widget.uid.isEmpty) {
       // Navigate back to the login screen
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
@@ -133,7 +132,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ],
               ),
-          EventCards(eventsData: widget._eventsDataFuture,),
+          EventCards(dataList: widget._dataList,),
           const createEvent(),
 
           ],
@@ -245,7 +244,7 @@ Widget profileArea(String username, VoidCallback onProfilePressed) {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "${username ?? "username"}",
+              "${username}",
               style: TextStyle(
                 fontSize: 16.0,
                 color: Color(0xFFA0A0A0),
@@ -320,9 +319,9 @@ class createEvent extends StatelessWidget {
 
 
 class EventCards extends StatefulWidget {
-  Future<Map<String, dynamic>>? eventsData;
+  final List<Map<String, dynamic>> dataList;
 
-  EventCards({Key? key,required this.eventsData}) : super(key: key);
+  EventCards({Key? key,required this.dataList}) : super(key: key);
 
   @override
   State<EventCards> createState() => _EventCardsState();

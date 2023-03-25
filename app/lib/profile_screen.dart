@@ -20,6 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top:false,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xFFF6B95D),
