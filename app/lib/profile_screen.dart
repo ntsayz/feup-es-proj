@@ -19,19 +19,31 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid:widget.uid,)));
-          },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFF6B95D),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid:widget.uid,)));
+            },
+          ),
+          title: Text("Profile"),
         ),
-        title: Text("Profile"),
-      ),
-      body: ElevatedButton(
-        onPressed: () => _signOut(context),
-        child: Text('Sign Out'),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () => _signOut(context),
+            child: Text('Sign Out'),
+            style: ElevatedButton.styleFrom(
+                  primary: const Color(0xFFF6B95D),
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold))
+          ),
+        ),
       ),
     );
   }
