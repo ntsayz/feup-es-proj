@@ -330,13 +330,11 @@ class EventCards extends StatefulWidget {
 class _EventCardsState extends State<EventCards> {
   final List<String> sportsCards = ['assets/images/card/football.jpg',];
 
-  final List<String> locationPlaceholder = ['Nome do Campo','Localização','Nome do Campo',
-    'Nome do Campo','Localização','Nome do Campo','Nome do Campo','Localização','Nome do Campo','Localização',];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10,0,10,10),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xFFF6B95D),
@@ -346,13 +344,16 @@ class _EventCardsState extends State<EventCards> {
           height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: widget.dataList.length,
             itemBuilder: (BuildContext context, int index) {
-              String imageUrl = sportsCards[Random().nextInt(sportsCards.length)];
-              String title = locationPlaceholder[index];
               return Padding(
-                padding: const EdgeInsets.fromLTRB(6,20,6,20),
-                child: EventCard(title: title, imageUrl: imageUrl),
+                padding: const EdgeInsets.fromLTRB(6, 20, 6, 20),
+                child: EventCard(
+                  title: widget.dataList[index]['name'],
+                  imageUrl: "assets/images/card/football.jpg",
+                  occupancy:  widget.dataList[index]['participants'].length,
+                  capacity: widget.dataList[index]['capacity'],
+                ),
               );
             },
           ),
@@ -370,8 +371,12 @@ class _EventCardsState extends State<EventCards> {
 class EventCard extends StatefulWidget {
   final String title;
   final String imageUrl;
+  final int capacity;
+  int occupancy;
 
-  const EventCard({Key? key, required this.title, required this.imageUrl}) : super(key: key);
+
+  EventCard({Key? key, required this.title,
+  required this.imageUrl,required this.capacity, required this.occupancy}) : super(key: key);
 
   @override
   _EventCardState createState() => _EventCardState();
@@ -409,9 +414,9 @@ class _EventCardState extends State<EventCard> {
                   setState(() {
                     _isSelected = !_isSelected;
                     if (_isSelected) {
-                      occ++;
+                      widget.occupancy++;
                     } else {
-                      occ--;
+                      widget.occupancy--;
                     }
                   });
                 },
@@ -433,7 +438,7 @@ class _EventCardState extends State<EventCard> {
               left: 8,
               bottom: 8,
               child: Text(
-                "$occ/$cap",
+                "${widget.occupancy}/${widget.capacity}",
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
