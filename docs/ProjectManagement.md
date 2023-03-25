@@ -19,7 +19,7 @@ Most important of all, we began to work with flutter, which will helps us in the
 
 #### **Iteration 1**
 
-![Iteration Backlog for Iteration 1](images/Iteration 1 backlog.png)
+![Iteration Backlog for Iteration 1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/ddae9b1058a53c502701314e0453f0ef651e3103/images/Iteration%201%20backlog.png)
 
 For this iteration we tried to be a bit more ambicious and start to work on the specifities of our app, such as the creation of an event. Besides that in this iteration we will continue to work on the connection between our code and the database with the creation of a group of users. We had a meeting to review what had been done and to discuss what we should in this next moment. We decided in this meeting to split the work into groups.
 
