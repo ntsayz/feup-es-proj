@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
+import 'package:intl/intl.dart';
+
 
 import 'package:trabalho/home.dart';
 
@@ -47,7 +49,7 @@ class _UserInformationsState extends State<UserInformations> {
     return selectedDate ?? DateTime.now();
   }
 
-
+  var formatter = new DateFormat('dd-MM-yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -94,18 +96,25 @@ class _UserInformationsState extends State<UserInformations> {
               ),
             ),
 
-            MaterialButton(
-                onPressed: _ShowDatePicker,
-                child: const Padding(padding: EdgeInsets.all(20.0),
-                child: Text('Birth date', style: TextStyle(color: Colors.amber),),
 
-                ),),
+            const Padding(padding: EdgeInsets.all(20.0),
+              child: Text("Enter your Birth Date"),),
+            TextFormField(
 
+              decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
+                  icon: Icon(Icons.calendar_today)),
+              readOnly: true,
+              onTap: () => _ShowDatePicker(),
+            ),
+
+
+            SizedBox(height: 35,),
             RawMaterialButton(
+                padding: EdgeInsets.all(20.0),
                 fillColor: Colors.blue,
-                child: const Text('send'),
+                child: const Text('Confirm'),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)
+                    borderRadius: BorderRadius.circular(30.0)
                 ),
                 onPressed: () {
                     addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim());

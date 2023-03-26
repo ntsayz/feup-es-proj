@@ -142,11 +142,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
            borderRadius: BorderRadius.circular(12.0)
              ),
             onPressed: () async {
-              User? user = await createUserWithEmailAndPassword(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                  context: context);
-              print(user);
 
               final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(_emailController.text);
 
@@ -175,32 +170,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
               }
 
 
-    if (_passwordController2.text == _passwordController.text) {
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString())));
-
-                 /* showDialog(context: context,
-
-                    builder: (BuildContext context) { return SimpleDialog(
-                      title: Text("USER CREATED", style: TextStyle(fontSize: 30),),
-                      children: <Widget>[
-                        ButtonTheme(
-                            minWidth: 50,
-                            child:
-                            ElevatedButton(
-                                onPressed: () =>  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp())),
-
-                                child: Text("Back to Login Page"))
-                        ),
-
-                      ],
-
-
-                    ); });*/
-                  }
-              }
-
-              if (_passwordController.text.length <=6 || _passwordController2.text.length <=6){
+              else if (_passwordController.text.length <=6 || _passwordController2.text.length <=6){
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Container(
                     height: 90,
@@ -226,28 +196,40 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
               else if (_passwordController.text.length >=6 || _passwordController2.text.length >=6){
                 if (_passwordController2.text != _passwordController.text){
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Container(
-                      height: 90,
-                      decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                      child:
-                      Row(
-                          children: [
-                            const SizedBox( width: 35,),
-                            Expanded(child: Row(
-                              children: const [
-                                Text("Passwords are not tha same", style: TextStyle(fontSize: 18, color: Colors.white),)
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Container(
+                        height: 90,
+                        decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        child:
+                        Row(
+                            children: [
+                              const SizedBox( width: 35,),
+                              Expanded(child: Row(
+                                children: const [
+                                  Text("Passwords are not tha same", style: TextStyle(fontSize: 18, color: Colors.white),)
 
-                              ],
-                            ) )
-                          ]
-                      )
-                  ),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                ));
-              }}
+                                ],
+                              ) )
+                            ]
+                        )
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ));
+                }}
+    if(_passwordController2.text == _passwordController.text) {
+                User? user = await createUserWithEmailAndPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    context: context);
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString())));
+                }
+              }
+
+
+
 
 
 
