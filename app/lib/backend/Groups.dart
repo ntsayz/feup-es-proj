@@ -5,6 +5,7 @@ import 'package:trabalho/screens/main.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+String groupID = '';
 
 
 
@@ -25,7 +26,6 @@ Future<void> addUserToGroup (User? user, String groupID) async{
   await _firestore.collection('groups').doc(groupID).update({'users': FieldValue.arrayUnion([user?.uid])});
 }
 
-String groupID = '';
 
 Future<List<String?>> getAllGroups() async {
   final QuerySnapshot<Map<String, dynamic>> querySnapshot =
