@@ -1,14 +1,13 @@
 import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
+import 'package:trabalho/screens/home.dart';
+import 'package:trabalho/backend/Groups.dart';
 
-
-import 'package:trabalho/home.dart';
 
 class UserInformations extends StatefulWidget {
 
@@ -112,7 +111,8 @@ class _UserInformationsState extends State<UserInformations> {
             RawMaterialButton(
                 padding: EdgeInsets.all(20.0),
                 fillColor: Colors.blue,
-                child: const Text('Confirm'),
+                child: const Text('Confirm',
+                  style: TextStyle(fontSize: 20),),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)
                 ),
@@ -140,13 +140,14 @@ class _UserInformationsState extends State<UserInformations> {
 
 
 
-addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user){
+addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user) async {
   FirebaseFirestore.instance.collection('user').doc(uid).set({
     'Birth Date' : date,
     'Full name': name,
     'Phone number' : int.parse(phone),
     'Username' : user,
   });
+
 
 
 

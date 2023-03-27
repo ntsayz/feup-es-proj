@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trabalho/home.dart';
-import 'package:trabalho/main.dart';
+import 'package:trabalho/screens/home.dart';
+import 'package:trabalho/screens/main.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:trabalho/profile_screen.dart';
-import 'package:trabalho/new_user.dart';
-import 'package:trabalho/home.dart';
-import 'package:trabalho/reset_password.dart';
+import 'package:trabalho/screens/profile_screen.dart';
+import 'package:trabalho/screens/new_user.dart';
+import 'package:trabalho/screens/home.dart';
+import 'package:trabalho/screens/reset_password.dart';
 
 
 void main() {
