@@ -333,29 +333,31 @@ class _EventCardsState extends State<EventCards> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color(0xFFF6B95D),
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        child: SizedBox(
-          height: 300,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.dataList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(6, 20, 6, 20),
-                child: EventCard(
-                  title: widget.dataList[index]['name'],
-                  imageUrl: "assets/images/card/football.jpg",
-                  occupancy:  widget.dataList[index]['participants'].length,
-                  capacity: widget.dataList[index]['capacity'],
-                ),
-              );
-            },
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(0xFFF6B95D),
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: SizedBox(
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.dataList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(6, 20, 6, 20),
+                  child: EventCard(
+                    title: widget.dataList[index]['name'],
+                    imageUrl: "assets/images/card/football.jpg",
+                    occupancy:  widget.dataList[index]['participants'].length,
+                    capacity: widget.dataList[index]['capacity'],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
