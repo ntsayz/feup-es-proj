@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trabalho/main.dart';
-import 'package:trabalho/profile_screen.dart';
+import 'package:trabalho/screens/profile_screen.dart';
+import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/backend/Groups.dart';
+
 import 'dart:math';
-
-
 
 
 class MainScreen extends StatefulWidget {
@@ -298,8 +298,7 @@ class createEvent extends StatelessWidget {
           height: 100,
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
-
+            onPressed: ()  {
 
             },
             style: ElevatedButton.styleFrom(

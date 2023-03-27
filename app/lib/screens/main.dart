@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:trabalho/profile_screen.dart';
-import 'package:trabalho/new_user.dart';
-import 'package:trabalho/home.dart';
-import 'package:trabalho/reset_password.dart';
+import 'package:trabalho/screens/profile_screen.dart';
+import 'package:trabalho/screens/new_user.dart';
+import 'package:trabalho/screens/home.dart';
+import 'package:trabalho/screens/reset_password.dart';
 
 
 void main() {
@@ -70,6 +70,10 @@ class LoginScreen extends StatefulWidget{
 
 class _LoginScreenState extends State<LoginScreen>{
 
+  var _isObscured=true;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
 
 
 
@@ -90,11 +94,15 @@ class _LoginScreenState extends State<LoginScreen>{
 
   }
 
+  @override
+  void dispose(){
+    _passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -117,13 +125,22 @@ class _LoginScreenState extends State<LoginScreen>{
             height: 30,
           ),
           const Text("Enter your password"),
-          TextField(
-            obscureText: true,
+          TextFormField(
+            obscureText: _isObscured,
             controller: _passwordController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
                 hintText: "PASSWORD",
-                prefixIcon: Icon(Icons.lock)
-            ),
+                prefixIcon: Icon(Icons.lock),
+              suffixIcon: IconButton(
+                  icon: _isObscured
+                      ?const Icon(Icons.visibility)
+                      : const Icon(Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured =!_isObscured;
+                    });
+                  },
+            )),
           ),
           const SizedBox(
             height: 20,
