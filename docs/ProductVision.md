@@ -23,7 +23,9 @@ Chat entre elementos – chat criado entre o grupo de utilizadores que concordou
 
 Perfil de empresas – cada complexo desportivo/ginásio pode ter um perfil na app para criar publicações onde informem os utilizadores da possibilidade de reserva do seu espaço.
 
+Mapa - interface onde se pode ver a localização e as diferentes informações das várias atividades.
+
 ### Assumptions and dependencies
 - Internet: manter a app atualizada sempre que ocorrem novas atividades.
-- GoogleMaps: para criar o mapa onde posso ver as atividades que irão decorrer num futuro próximo (cada uma delas marcada com um pin).
+- GoogleMaps: para criar o mapa onde é possível ver as atividades que irão decorrer num futuro próximo (cada uma delas marcada com um pin).
 - Firebase: guardar os dados de acesso de cada utilizador.
