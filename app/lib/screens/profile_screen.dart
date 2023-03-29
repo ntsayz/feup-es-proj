@@ -27,7 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid:widget.uid,)));
+              //Navigator.of(context).maybePop();
+              Navigator.pop(context);
             },
           ),
           title: Text("Profile"),

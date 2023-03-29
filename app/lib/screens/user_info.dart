@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:trabalho/screens/home.dart';
 import 'package:trabalho/backend/Groups.dart';
+import 'package:trabalho/screens/components/widgets.dart';
 
 
 class UserInformations extends StatefulWidget {
