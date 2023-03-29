@@ -1,15 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/screens/components/Header.dart';
 import 'package:trabalho/screens/components/Search_bar.dart';
 import 'package:trabalho/screens/components/widgets.dart';
-import 'package:trabalho/screens/home.dart';
 import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/profile_screen.dart';
+import 'package:trabalho/screens/components/ChatGroupCards.dart';
 
 class MessagesScreen extends StatefulWidget {
   final String uid;
   Map<String, dynamic>? userData;
-  MessagesScreen({Key? key, required this.uid, required this.userData}) : super(key: key);
+  late List<Map<String, dynamic>> dataList;
+  MessagesScreen({Key? key, required this.uid, required this.userData, required this.dataList}) : super(key: key);
+
+  List<Map<String, dynamic>> dataListsMock = [
+    {
+      "name": "Alice",
+      "age": 30,
+    },{
+      "name": "Alice",
+      "age": 30,
+    },{
+      "name": "Alice",
+      "age": 30,
+    },{
+      "name": "Alice",
+      "age": 30,
+    },{
+      "name": "Alice",
+      "age": 30,
+    }
+  ];
+
 
   @override
   State<MessagesScreen> createState() => _MessagesScreenState();
@@ -25,10 +47,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
     if (widget.userData != null) {
       setState(() {
         _username = widget.userData!["Username"];
+
       });
 
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +78,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 Messages(context);
               }),
               Search_bar(search_title: 'Search messages',),
+              ChatGroupCards(dataList: widget.dataListsMock),
               YellowButton(text: "HOME", height: 100, width: 100,onItemTapped: (){Messages(context);},),
             ],
           ),

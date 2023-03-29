@@ -9,6 +9,7 @@ import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/components//Header.dart';
 import 'package:trabalho/screens/components/Search_bar.dart';
 import 'package:trabalho/screens/components/widgets.dart';
+import 'package:trabalho/screens/components/EventCards.dart';
 import 'package:trabalho/screens/components/BottomNavigation.dart';
 
 
@@ -17,7 +18,30 @@ class MainScreen extends StatefulWidget {
   MainScreen({Key? key, required this.uid}) : super(key: key);
   Map<String, dynamic>? userData;
 
-  late List<Map<String, dynamic>> _dataList = [];
+  //late List<Map<String, dynamic>> _dataList = [];
+
+  List<Map<String, dynamic>>_dataList =  [
+  {
+  "name": "Grupo de Futebol",
+  "participants": {"dewdw","fewfwe","deqdfe","dqddnwe"},
+  "capacity": 6,
+  },{
+  "name": "Grupo de Futebol",
+  "participants": {"dewdw","fewfwe","deqdfe","dqddnwe","dwedff"},
+  "capacity": 9,
+  },{
+  "name": "Grupo de Futebol",
+  "participants": {"dewdw","fewfwe"},
+  "capacity": 3,
+  },{
+  "name": "Grupo de Futebol",
+  "participants": {"dewdw","fewfwe","deqdfe"},
+  "capacity": 6,
+  },{
+  "name": "Grupo de Futebol",
+  "participants": {"dewdw","fewfwe"},
+  "capacity": 12,
+  },];
 
 
   @override
@@ -34,6 +58,8 @@ class _MainScreenState extends State<MainScreen> {
   late String username = ""  ;
 
 
+
+
   @override
   void initState()  {
     super.initState();
@@ -42,8 +68,9 @@ class _MainScreenState extends State<MainScreen> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
+        getEventsDataMock();
         setState(() {
-            getEventsData();
+            getEventsDataMock();
         });
 
     }
@@ -53,6 +80,9 @@ class _MainScreenState extends State<MainScreen> {
       FirebaseFirestore.instance.collection('Event').get().then((querySnapshot) {
         widget._dataList = querySnapshot.docs.map((doc) => doc.data()).toList();
       });
+    }
+    void getEventsDataMock() async {
+
     }
 
 
@@ -148,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(uid: widget.uid, userData: widget.userData) ));
   }
   void Messages(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(uid: widget.uid, userData: widget.userData) ));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(uid: widget.uid, userData: widget.userData,dataList: widget._dataList,) ));
   }
   void CreateEvent(BuildContext context){
     print("create event");
