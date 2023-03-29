@@ -26,7 +26,7 @@ class MainScreen extends StatefulWidget {
   "participants": {"dewdw","fewfwe","deqdfe","dqddnwe"},
   "capacity": 6,
   },{
-  "name": "Grupo de Futebol",
+  "name": "Grupo de Ténis",
   "participants": {"dewdw","fewfwe","deqdfe","dqddnwe","dwedff"},
   "capacity": 9,
   },{
