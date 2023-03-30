@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
 import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/screens/my_teams.dart';
 import 'package:trabalho/backend/Groups.dart';
 
 //Common Widgets
@@ -160,7 +161,7 @@ class _MainScreenState extends State<MainScreen> {
                   YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){CreateEvent(context);},),
                 ],
               ),
-              CustomAppBar(title: "MY TEAMS",),
+              MyTeams(uid: widget.uid, userData: widget.userData),
               CustomAppBar(title: "LOCATION",),
               CustomAppBar(title: "PLACES",),
             ],
@@ -184,6 +185,8 @@ class _MainScreenState extends State<MainScreen> {
     print("create event");
   }
 }
+
+
 
 
 
