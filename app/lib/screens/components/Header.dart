@@ -47,11 +47,13 @@ Widget Header(String username, VoidCallback onProfilePressed,VoidCallback onMess
                 const SizedBox(width: 8.0),
                 InkWell(
                   onTap: onProfilePressed,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      'https://picsum.photos/id/29/200',
+                  child: ClipOval(
+                    child: Image.asset(
+                    'assets/images/card/profilepicture.png',
+                    width: 65,
+                    height: 65,
+                    fit: BoxFit.cover,
                     ),
-                    radius: 25.0,
                   ),
                 ),
               ],
