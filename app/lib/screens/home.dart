@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
 import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/screens/my_teams.dart';
 import 'package:trabalho/backend/Groups.dart';
 
 //Common Widgets
@@ -26,7 +27,7 @@ class MainScreen extends StatefulWidget {
   "participants": {"dewdw","fewfwe","deqdfe","dqddnwe"},
   "capacity": 6,
   },{
-  "name": "Grupo de Futebol",
+  "name": "Grupo de Ténis",
   "participants": {"dewdw","fewfwe","deqdfe","dqddnwe","dwedff"},
   "capacity": 9,
   },{
@@ -68,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
+        getEventsDataMock();
         setState(() {
             getEventsDataMock();
         });
@@ -122,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
     return WillPopScope(
       onWillPop: () async{
         //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo
-        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)\\\\\\\\\\\\\]
+        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)\\\\\\\\\\\\\
       },
       child: Scaffold(
         extendBody: false,
@@ -159,7 +161,7 @@ class _MainScreenState extends State<MainScreen> {
                   YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){CreateEvent(context);},),
                 ],
               ),
-              CustomAppBar(title: "MY TEAMS",),
+              MyTeams(uid: widget.uid, userData: widget.userData),
               CustomAppBar(title: "LOCATION",),
               CustomAppBar(title: "PLACES",),
             ],
@@ -183,6 +185,8 @@ class _MainScreenState extends State<MainScreen> {
     print("create event");
   }
 }
+
+
 
 
 
