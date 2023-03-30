@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen>{
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 130,),
+          const SizedBox(height: 120,),
 
           const Text("Enter your mail"),
           TextField(
@@ -220,4 +220,5 @@ class _LoginScreenState extends State<LoginScreen>{
     // TODO: implement build
     throw UnimplementedError();
   }
+
 }
