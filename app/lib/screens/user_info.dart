@@ -142,19 +142,41 @@ class _UserInformationsState extends State<UserInformations> {
 
 
 addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user) async {
-  FirebaseFirestore.instance.collection('user').doc(uid).set({
-    'Birth Date' : date,
-    'Full name': name,
-    'Phone number' : int.parse(phone),
-    'Username' : user,
-  });
-
-
-
-
-
+  if (usernameAvaible(user)==true) {
+    FirebaseFirestore.instance.collection('user').doc(uid).set({
+      'Birth Date': date,
+      'Full name': name,
+      'Phone number': int.parse(phone),
+      'Username': user,
+    });
   return   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: uid)));
+  }
+
+  else{
+
+  }
+
+
+
 
 
   // return Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
+}
+
+
+
+usernameAvaible (String name) async {
+  final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+      await FirebaseFirestore.instance.collection('user').get();
+  final List<String?> fieldValues = querySnapshot.docs
+      .map((DocumentSnapshot<Map<String, dynamic>> document) => document.data()!['Username'] as String?)
+      .where((String? fieldValue) => fieldValue != null)
+      .toList();
+
+
+   if (fieldValues.contains(name)){
+     return false;
+   }
+
+   return true;
 }

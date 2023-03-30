@@ -23,11 +23,11 @@ class _MyTeamsState extends State<MyTeams> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Group Name?'),
+              title: Text('What is the group name ?'),
               content: TextField(
                 controller: _groupnamecontroller,
                 keyboardType: TextInputType.name,
-                decoration: InputDecoration(hintText: 'Enter your text here'),
+                decoration: InputDecoration(hintText: 'ex:.. Grupo de Futebol'),
               ),
               actions: <Widget>[
                 TextButton(

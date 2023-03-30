@@ -11,10 +11,14 @@ String groupID = '';
 
 
 Future<void> createGroup(String name, String ID) async{
-  await _firestore.collection('groups').add({
+  DocumentReference docref = await _firestore.collection('groups').add({
     'Group Name': name,
     'users': FieldValue.arrayUnion([ID]),
   });
+
+  await _firestore.collection('user').doc(docref.id).update({'groups': FieldValue.arrayUnion([groupID])});
+
+
 }
 
 Future<void> addUIDToGroup (String ID, String groupID) async{
