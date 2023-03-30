@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-
-class D8ddzukxuaaxldy1Widget extends StatefulWidget {
+class appiconWidget extends StatefulWidget {
   @override
-  _D8ddzukxuaaxldy1WidgetState createState() => _D8ddzukxuaaxldy1WidgetState();
+  _appiconWidgetState createState() => _appiconWidgetState();
 }
 
-class _D8ddzukxuaaxldy1WidgetState extends State<D8ddzukxuaaxldy1Widget> {
+class _appiconWidgetState extends State<appiconWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,15 +16,12 @@ class _D8ddzukxuaaxldy1WidgetState extends State<D8ddzukxuaaxldy1Widget> {
       ),
       child: ClipOval(
         child: Image.asset(
-          'assets/images/card/profilepicture.png',
-          width: 90,
-          height: 90,
+          'assets/icons/icon.png',
+          width: 70,
+          height: 70,
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 }
-
-
-
