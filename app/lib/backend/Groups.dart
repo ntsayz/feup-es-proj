@@ -16,8 +16,10 @@ Future<void> createGroup(String name, String ID) async{
     'users': FieldValue.arrayUnion([ID]),
   });
 
-  await _firestore.collection('user').doc(docref.id).update({'groups': FieldValue.arrayUnion([groupID])});
 
+  await _firestore.collection('user').doc(ID).update({
+    'groups': FieldValue.arrayUnion([docref.id]),
+  });
 
 }
 
