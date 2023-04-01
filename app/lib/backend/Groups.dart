@@ -86,3 +86,25 @@ Future<List<String>> getUIDGroups(String UID) async {
   final List<String> stringArray = List<String>.from(arrayField.map((element) => element.toString()));
   return stringArray;
 }
+
+Future<List<String>> getUsersofGroup (String ID) async{
+  final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await FirebaseFirestore.instance.collection('groups').doc(ID).get();
+  final List<dynamic> arrayField = documentSnapshot.data()!['users'];
+  final List<String> stringArray = List<String>.from(arrayField.map((element) => element.toString()));
+  return stringArray;
+}
+
+Future<String?> getUserName (String ID) async{
+  // Get a reference to the Firestore collection
+  CollectionReference collectionReference = FirebaseFirestore.instance.collection('user');
+
+  // Get the document with the given ID
+  DocumentSnapshot documentSnapshot = await collectionReference.doc(ID).get();
+
+  // If the document exists, return the value of the "myValue" field
+  if (documentSnapshot.exists) {
+    return documentSnapshot.get('Username');
+  } else {
+    throw Exception('Document not found');
+  }
+}

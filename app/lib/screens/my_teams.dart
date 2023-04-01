@@ -2,6 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/components/widgets.dart';
+import 'package:trabalho/screens/group_screen.dart';
+
+
+
+
 class MyTeams extends StatefulWidget {
   final String uid;
   final Map<String, dynamic>? userData;
@@ -113,7 +118,14 @@ class GroupButton extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
         if (snapshot.hasData) {
           return ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => groupScreen(uid: groupId),
+                ),
+              );
+            },
             child: Text(
               snapshot.data!,
               style: TextStyle(
