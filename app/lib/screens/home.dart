@@ -13,7 +13,6 @@ import 'package:trabalho/screens/components/widgets.dart';
 import 'package:trabalho/screens/components/EventCards.dart';
 import 'package:trabalho/screens/components/BottomNavigation.dart';
 
-import 'create_event.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -184,7 +183,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(uid: widget.uid, userData: widget.userData,dataList: widget._dataList,) ));
   }
   void CreateEvent(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen()));
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen()));
   }
 }
 
