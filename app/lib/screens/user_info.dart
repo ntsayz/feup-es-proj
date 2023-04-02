@@ -142,25 +142,70 @@ class _UserInformationsState extends State<UserInformations> {
 
 
 addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user) async {
-  if (usernameAvaible(user)==true) {
+  bool isAvaible = await usernameAvaible(user);
+  bool phoneAvaible = await phoneNumberUsed(phone);
+
+  if (!isAvaible) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Container(
+          height: 90,
+          decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child:
+          Row(
+              children: [
+                const SizedBox( width: 35,),
+                Expanded(child: Row(
+                  children: const [
+                    Text("Username already in use", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                  ],
+                ) )
+              ]
+          )
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ));
+  }
+
+  else if (!phoneAvaible){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Container(
+          height: 90,
+          decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child:
+          Row(
+              children: [
+                const SizedBox( width: 35,),
+                Expanded(child: Row(
+                  children: const [
+                    Text("Phone number already in use", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                  ],
+                ) )
+              ]
+          )
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ));
+  }
+
+
+  else {
     FirebaseFirestore.instance.collection('user').doc(uid).set({
       'Birth Date': date,
       'Full name': name,
       'Phone number': int.parse(phone),
       'Username': user,
     });
-  return   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: uid)));
-  }
-
-  else{
-
+    return Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MainScreen(uid: uid)));
   }
 
 
-
-
-
-  // return Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
 }
 
 
@@ -179,4 +224,23 @@ usernameAvaible (String name) async {
    }
 
    return true;
+}
+
+phoneNumberUsed (String phone) async{
+  var phoneNumber = int.parse(phone);
+
+
+  final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+  await FirebaseFirestore.instance.collection('user').get();
+  final List<int?> fieldValues = querySnapshot.docs
+      .map((DocumentSnapshot<Map<String, dynamic>> document) => document.data()!['Phone number'] as int?)
+      .where((int? fieldValue) => fieldValue != null)
+      .toList();
+
+
+  if (fieldValues.contains(phoneNumber)){
+    return false;
+  }
+
+  return true;
 }
