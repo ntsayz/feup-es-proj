@@ -48,7 +48,21 @@ class _MyTeamsState extends State<MyTeams> {
           );
         } else if (!snapshot.hasData) {
           // if the future completed but returned no data, show an empty message
-          return Center(child: Text('No data found'));
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text("You don´t have any groups yet. Create one if you want"),
+                SizedBox(height: 16),
+                YellowButton(
+                  text: "CREATE GROUP",
+                  height: 50,
+                  width: double.infinity,
+                  onItemTapped: () => newGroupName(),
+                ),
+              ],
+            ),
+          );
         } else {
           // if the future completed and returned data, build the UI with the data
           List<String> groups = snapshot.data!;
