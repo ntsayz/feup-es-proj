@@ -13,22 +13,19 @@ class _D8ddzukxuaaxldy1WidgetState extends State<D8ddzukxuaaxldy1Widget> {
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-        borderRadius : BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
-          bottomLeft: Radius.circular(50),
-          bottomRight: Radius.circular(50),
-        ),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: ClipOval(
         child: Image.asset(
           'assets/images/card/profilepicture.png',
-          width: 80,
-          height: 80,
+          width: 90,
+          height: 90,
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 }
+
+
 
