@@ -58,34 +58,38 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
-      onWillPop: () async{
-        //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Sai do aplicativo
-        return false; // NÃO PERMITE QUE O UTILIZADOR VOLTE PARA A PÁGINA ANTERIOR (LOGIN-REGISTO)\\\\\\\\\\\\\]
+      onWillPop: () async {
+        //SystemChannels.platform.invokeMethod('SystemNavigator.pop');  // Exit the application
+        return false; // DO NOT ALLOW THE USER TO GO BACK TO THE PREVIOUS PAGE (LOGIN-REGISTRATION)
       },
       child: Scaffold(
-        extendBody: false,
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFF6B95D),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text("Messages"),
+        ),
         body: SafeArea(
-          top:true,
+          top: true,
           child: ListView(
             shrinkWrap: false,
             children: [
-              Header(_username, () {
-                Profile(context);
-              }, (){
-                Messages(context);
-              }),
               Search_bar(search_title: 'Search messages',),
               ChatGroupCards(dataList: widget.dataListsMock),
-              YellowButton(text: "HOME", height: 100, width: 100,onItemTapped: (){Messages(context);},),
             ],
           ),
         ),
       ),
     );
   }
+
+
   void Profile(BuildContext context){
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen(uid:widget.uid,userData: widget.userData,)));
   }
