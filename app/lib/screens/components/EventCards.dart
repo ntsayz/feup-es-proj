@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class EventCards extends StatefulWidget {
   final List<Map<String, dynamic>> dataList;
 
-  EventCards({Key? key,required this.dataList}) : super(key: key);
+  EventCards({Key? key, required this.dataList}) : super(key: key);
 
   @override
   State<EventCards> createState() => _EventCardsState();
 }
 
 class _EventCardsState extends State<EventCards> {
-  final List<String> sportsCards = ['assets/images/card/football.jpg',];
+  final List<String> sportsCards = [
+    'assets/images/card/football.jpg',
+    'assets/images/card/basketball.jpg',
+    'assets/images/card/futsal.jpg',
+    'assets/images/card/handball.jpg',
+    'assets/images/card/karting.jpg',
+    'assets/images/card/running.jpg',
+    'assets/images/card/swimming.jpg',
+    'assets/images/card/tennis.jpg',
+    'assets/images/card/volleyball.jpg',
+    'assets/images/card/athletics.jpg'
+  ];
 
+  String _getImageUrl() {
+    // You can add a conditional statement here to determine which image URL to use.
+    int randomIndex = Random().nextInt(sportsCards.length);
+    return sportsCards[randomIndex];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +49,8 @@ class _EventCardsState extends State<EventCards> {
                 padding: const EdgeInsets.fromLTRB(6, 20, 6, 20),
                 child: EventCard(
                   title: widget.dataList[index]['name'],
-                  imageUrl: "assets/images/card/football.jpg",
-                  occupancy:  widget.dataList[index]['participants'].length,
+                  imageUrl: _getImageUrl(),
+                  occupancy: widget.dataList[index]['participants'].length,
                   capacity: widget.dataList[index]['capacity'],
                 ),
               );
@@ -44,6 +61,7 @@ class _EventCardsState extends State<EventCards> {
     );
   }
 }
+
 
 
 

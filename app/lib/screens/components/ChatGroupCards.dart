@@ -21,7 +21,7 @@ class _ChatGroupCardsState extends State<ChatGroupCards> {
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: SizedBox(
-          height: 500,
+          height: 650,
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: widget.dataList.length,
