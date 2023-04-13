@@ -29,6 +29,18 @@ class MessagesScreen extends StatefulWidget {
     },{
       "name": "Alice",
       "age": 30,
+    },
+    {
+      "name": "Alice",
+      "age": 30,
+    },
+    {
+      "name": "Alice",
+      "age": 30,
+    },
+    {
+      "name": "Alice",
+      "age": 30,
     }
   ];
 
@@ -52,8 +64,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
     }
   }
-
-
 
 
   @override
@@ -81,7 +91,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
             shrinkWrap: false,
             children: [
               Search_bar(search_title: 'Search messages',),
-              ChatGroupCards(dataList: widget.dataListsMock),
+              ChatGroupCards(dataList: widget.dataList),
             ],
           ),
         ),

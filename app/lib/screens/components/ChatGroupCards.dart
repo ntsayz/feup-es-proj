@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ChatGroupCards extends StatefulWidget {
@@ -10,6 +12,24 @@ class ChatGroupCards extends StatefulWidget {
 }
 
 class _ChatGroupCardsState extends State<ChatGroupCards> {
+  final List<String> sportsCards = [
+    'assets/images/card/football.jpg',
+    'assets/images/card/basketball.jpg',
+    'assets/images/card/futsal.jpg',
+    'assets/images/card/handball.jpg',
+    'assets/images/card/karting.jpg',
+    'assets/images/card/running.jpg',
+    'assets/images/card/swimming.jpg',
+    'assets/images/card/tennis.jpg',
+    'assets/images/card/volleyball.jpg',
+    'assets/images/card/athletics.jpg'
+  ];
+
+  String _getImageUrl() {
+    // You can add a conditional statement here to determine which image URL to use.
+    int randomIndex = Random().nextInt(sportsCards.length);
+    return sportsCards[randomIndex];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +49,10 @@ class _ChatGroupCardsState extends State<ChatGroupCards> {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
                 child: ChatGroupCard(
-                  name: "Grupo de Futebol",
-                  imageUrl: "assets/images/card/tennis.jpg",
-                  lastMessage: "Tiago: This is just mock data",
+                  name: widget.dataList[index]['name'],
+                  imageUrl: _getImageUrl(),
+                  lastMessage: "This is just mock data",
+                  lastMessageSender: 'Alice',
                 ),
               );
             },
@@ -48,12 +69,14 @@ class ChatGroupCard extends StatefulWidget {
   final String name;
   final String imageUrl;
   final String lastMessage;
+  final String lastMessageSender;
 
   ChatGroupCard({
     Key? key,
     required this.name,
     required this.imageUrl,
     required this.lastMessage,
+    required this.lastMessageSender,
   }) : super(key: key);
 
   @override
@@ -96,7 +119,7 @@ class _ChatGroupCardState extends State<ChatGroupCard> {
                         color: Colors.grey,
                       ),
                       SizedBox(width: 5.0),
-                      Text(widget.lastMessage,
+                      Text("${widget.lastMessageSender}: ${widget.lastMessage}",
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 13.0,
