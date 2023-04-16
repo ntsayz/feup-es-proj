@@ -21,6 +21,18 @@ class MyTeams extends StatefulWidget {
 class _MyTeamsState extends State<MyTeams> {
   TextEditingController _groupnamecontroller = TextEditingController();
 
+
+  int _counter = 0;
+
+  void _reloadPAge(){
+    setState(() {
+      _counter = _counter +1;
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
@@ -115,14 +127,17 @@ class _MyTeamsState extends State<MyTeams> {
             TextButton(
               child: Text('CANCEL'),
               onPressed: () {
+                _groupnamecontroller.clear();
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text('OK'),
               onPressed: () {
+                _groupnamecontroller.clear();
                 createGroup(_groupnamecontroller.text, widget.uid); //TODO
                 Navigator.of(context).pop();
+                _reloadPAge();
               },
             ),
           ],
