@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
@@ -17,7 +18,8 @@ import 'package:trabalho/screens/components/BottomNavigation.dart';
 
 class MainScreen extends StatefulWidget {
   final String uid;
-  MainScreen({Key? key, required this.uid}) : super(key: key);
+  User user;
+  MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
 
   //late List<Map<String, dynamic>> _dataList = [];
@@ -91,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState()  {
     super.initState();
-    if (widget.uid.isEmpty) {
+    if (widget.user.uid.isEmpty) {
       // Navigate back to the login screen
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
