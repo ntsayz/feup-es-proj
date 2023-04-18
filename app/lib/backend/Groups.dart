@@ -140,3 +140,15 @@ Future<String?> getUserByUsername(String username) async {
   }
 
 }
+
+
+Future<List<Map<String, dynamic>>> getGroupMessages(String groupId) async {
+  QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+      .collection('groups')
+      .doc(groupId)
+      .collection('messages')
+      .get();
+
+  List<Map<String, dynamic>> messages = querySnapshot.docs.map((doc) => doc.data()).toList();
+  return messages;
+}

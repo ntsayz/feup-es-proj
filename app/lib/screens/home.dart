@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
@@ -17,33 +18,62 @@ import 'package:trabalho/screens/components/BottomNavigation.dart';
 
 class MainScreen extends StatefulWidget {
   final String uid;
-  MainScreen({Key? key, required this.uid}) : super(key: key);
+  User user;
+  MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
 
-  //late List<Map<String, dynamic>> _dataList = [];
 
-  List<Map<String, dynamic>>_dataList =  [
+
+  //late List<Map<String, dynamic>> _dataList = [];
+  //TODO: Evenets and groups should be separated from each other
+  List<Map<String, dynamic>>_event_group_list =  [
   {
-  "name": "Grupo de Futebol",
-  "participants": {"dewdw","fewfwe","deqdfe","dqddnwe"},
-  "capacity": 6,
+    "name": "Grupo de Futebol",
+    "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
+    "capacity": 12,
+    "messages":{
+      "sender":"ntsaz",
+      "content":"hey what's up",
+      "time":"2023-04-12-22:25:28"
+    },}
+  ,{
+    "name": "Grupo de Andebol",
+    "participants": {"alice123","tiago5","guilherme"},
+    "capacity": 4,
+    "messages":{
+      "sender":"guilherme",
+      "content":"cheguei",
+      "time":"2023-04-12-22:25:28"
+    },
   },{
-  "name": "Grupo de Ténis",
-  "participants": {"dewdw","fewfwe","deqdfe","dqddnwe","dwedff"},
-  "capacity": 9,
+    "name": "Corrida",
+    "participants": {"alice123","tiago5"},
+    "capacity": 3,
+    "messages":{
+      "sender":"alice123",
+      "content":"olá,tudo bem?",
+      "time":"2023-04-12-22:25:28"
+    },
   },{
-  "name": "Grupo de Futebol",
-  "participants": {"dewdw","fewfwe"},
-  "capacity": 3,
-  },{
-  "name": "Grupo de Futebol",
-  "participants": {"dewdw","fewfwe","deqdfe"},
-  "capacity": 6,
-  },{
-  "name": "Grupo de Futebol",
-  "participants": {"dewdw","fewfwe"},
-  "capacity": 12,
-  },];
+      "name": "Ténis na Prelada",
+      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
+      "capacity": 6,
+      "messages":{
+        "sender":"ntsaz",
+        "content":"hey what's up",
+        "time":"2023-04-12-22:25:28"
+      },
+    },{
+      "name": "Karting Matosinhos",
+      "participants": {"alice123","tiago5","joao2001",},
+      "capacity": 8,
+      "messages":{
+        "sender":"tiago5",
+        "content":"hey what's up",
+        "time":"2023-04-12-22:25:28"
+      },
+    }
+  ];
 
 
   @override
@@ -62,30 +92,27 @@ class _MainScreenState extends State<MainScreen> {
 
 
 
+
   @override
   void initState()  {
     super.initState();
-    if (widget.uid.isEmpty) {
+    if (widget.user.uid.isEmpty) {
       // Navigate back to the login screen
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
-        getEventsDataMock();
-        setState(() {
-            getEventsDataMock();
-        });
-
     }
   }
 
    void getEventsData() async {
       FirebaseFirestore.instance.collection('Event').get().then((querySnapshot) {
-        widget._dataList = querySnapshot.docs.map((doc) => doc.data()).toList();
+        widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
       });
     }
-    void getEventsDataMock() async {
 
-    }
+
+
+
 
 
 
@@ -158,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                     ],
                   ),
-                  EventCards(dataList: widget._dataList,),
+                  EventCards(dataList: widget._event_group_list,),
                   YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){CreateEvent(context);},),
                 ],
               ),
@@ -180,7 +207,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(uid: widget.uid, userData: widget.userData) ));
   }
   void Messages(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(uid: widget.uid, userData: widget.userData,dataList: widget._dataList,) ));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(user: widget.user,userData: widget.userData,) ));
   }
   void CreateEvent(BuildContext context){
     //Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen()));

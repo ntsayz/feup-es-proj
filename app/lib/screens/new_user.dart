@@ -252,7 +252,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                     password: _passwordController.text,
                     context: context);
                 if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString())));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString(),user: user,)));
                 }
               }
 

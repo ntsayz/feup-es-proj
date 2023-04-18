@@ -166,7 +166,8 @@ class _LoginScreenState extends State<LoginScreen>{
                 print (user);
 
                 if (user!=null){
-                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: user.uid.toString(),)));
+
+                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: user.uid.toString(),user: user,)));
                 }
                 else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
