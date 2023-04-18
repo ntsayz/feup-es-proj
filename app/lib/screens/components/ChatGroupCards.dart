@@ -1,69 +1,18 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatGroupCards extends StatefulWidget {
+  User user;
   final List<Map<String, dynamic>> dataList;
+  Map<String, dynamic>? userData;
 
-  ChatGroupCards({Key? key,required this.dataList}) : super(key: key);
+  ChatGroupCards({Key? key,required this.dataList,required  this.user, required this.userData}) : super(key: key);
 
   @override
   State<ChatGroupCards> createState() => _ChatGroupCardsState();
-
-  List<Map<String, dynamic>> dataList1 =  [
-    {
-      "id":"59XDKIoWQ1E24rxUaREv",
-      "name": "Grupo de Futebol",
-      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-      "capacity": 12,
-      "messages":{
-        "sender":"ntsaz",
-        "content":"hey what's up",
-        "time":"2023-04-12-22:25:28"
-      },}
-    ,{
-      "id":"50AELHoVN0C23qyTbSDu",
-      "name": "Grupo de Andebol",
-      "participants": {"alice123","tiago5","guilherme"},
-      "capacity": 4,
-      "messages":{
-        "sender":"guilherme",
-        "content":"cheguei",
-        "time":"2023-04-12-22:25:28"
-      },
-    },{
-      "id":"70ZELJpXN3F27syWcSFw",
-      "name": "Corrida",
-      "participants": {"alice123","tiago5"},
-      "capacity": 3,
-      "messages":{
-        "sender":"alice123",
-        "content":"olá,tudo bem?",
-        "time":"2023-04-12-22:25:28"
-      },
-    },{
-      "id":"61YFLJoYR2F25syVcSEx",
-      "name": "Ténis na Prelada",
-      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-      "capacity": 6,
-      "messages":{
-        "sender":"ntsaz",
-        "content":"hey what's up",
-        "time":"2023-04-12-22:25:28"
-      },
-    },{
-      "id":"71ZFMKpYQ4G28tzXdTGz",
-      "name": "Karting Matosinhos",
-      "participants": {"alice123","tiago5","joao2001",},
-      "capacity": 8,
-      "messages":{{
-        "sender":"tiago5",
-        "content":"hey what's up",
-        "time":"2023-04-12-22:25:28"
-      }},
-    }
-  ];
 }
 
 class _ChatGroupCardsState extends State<ChatGroupCards> {
@@ -78,95 +27,6 @@ class _ChatGroupCardsState extends State<ChatGroupCards> {
     'assets/images/card/tennis.jpg',
     'assets/images/card/volleyball.jpg',
     'assets/images/card/athletics.jpg'
-  ];
-
-  List<Map<String, dynamic>>dataList =  [
-    {
-      "id":"59XDKIoWQ1E24rxUaREv",
-      "name": "Grupo de Futebol",
-      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-      "capacity": 12,
-      "messages": [
-        {
-          "sender":"ntsaz",
-          "content":"hey what's up",
-          "time":"2023-04-12-22:25:28"
-        },
-        {
-          "sender":"tiago5",
-          "content":"not much, how about you?",
-          "time":"2023-04-12-22:26:30"
-        }
-      ],}
-    ,{
-      "id":"50AELHoVN0C23qyTbSDu",
-      "name": "Grupo de Andebol",
-      "participants": {"alice123","tiago5","guilherme"},
-      "capacity": 4,
-      "messages": [
-        {
-          "sender":"guilherme",
-          "content":"hey what's up",
-          "time":"2023-04-12-22:25:28"
-        },
-        {
-          "sender":"tiago5",
-          "content":"not much, how about you?",
-          "time":"2023-04-12-22:26:30"
-        }
-      ],
-    },{
-      "id":"70ZELJpXN3F27syWcSFw",
-      "name": "Corrida",
-      "participants": {"alice123","tiago5"},
-      "capacity": 3,
-      "messages": [
-        {
-          "sender":"ntsaz",
-          "content":"hey what's up",
-          "time":"2023-04-12-22:25:28"
-        },
-        {
-          "sender":"tiago5",
-          "content":"not much, how about you?",
-          "time":"2023-04-12-22:26:30"
-        }
-      ],
-    },{
-      "id":"61YFLJoYR2F25syVcSEx",
-      "name": "Ténis na Prelada",
-      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-      "capacity": 6,
-      "messages": [
-        {
-          "sender":"ntsaz",
-          "content":"hey what's up",
-          "time":"2023-04-12-22:25:28"
-        },
-        {
-          "sender":"tiago5",
-          "content":"not much, how about you?",
-          "time":"2023-04-12-22:26:30"
-        }
-      ],
-    },{
-      "id":"71ZFMKpYQ4G28tzXdTGz",
-      "name": "Karting Matosinhos",
-      "participants": {"alice123","tiago5","joao2001",},
-      "capacity": 8,
-      "messages": [
-        {
-          "sender":"ntsaz",
-          "content":"hey what's up",
-          "time":"2023-04-12-22:25:28"
-        },
-        {
-          "sender":"tiago5",
-          "content":"not much, how about you?",
-          "time":"2023-04-12-22:26:30"
-        }
-      ],
-    }
   ];
 
   String _getImageUrl() {
@@ -188,16 +48,18 @@ class _ChatGroupCardsState extends State<ChatGroupCards> {
           height: 650,
           child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: widget.dataList1.length,
+            itemCount: widget.dataList.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
                 child: ChatGroupCard(
-                  groupId: widget.dataList1[index]['id'],
-                  name: widget.dataList1[index]['name'],
+                  userID: widget.user.uid,
+                  username: widget.userData!['Username'],
+                  groupId: widget.dataList[index]['groupId'],
+                  name: widget.dataList[index]['Group Name'],
                   imageUrl: _getImageUrl(),
-                  lastMessage: "mock",//widget.dataList1[index]['messages']['content'],
-                  lastMessageSender:"data", //widget.dataList1[index]['messages']['sender'],
+                  lastMessage: "be fixed soon",//widget.dataList1[index]['messages']['content'],
+                  lastMessageSender:"This will", //widget.dataList1[index]['messages']['sender'],
                 ),
               );
             },
@@ -213,12 +75,17 @@ class _ChatGroupCardsState extends State<ChatGroupCards> {
 class ChatGroupCard extends StatefulWidget {
   final String groupId;
   final String name;
+  final String username;
   final String imageUrl;
   final String lastMessage;
   final String lastMessageSender;
 
+  final String userID;
+
   ChatGroupCard({
     Key? key,
+    required this.userID,
+    required this.username,
     required this.groupId,
     required this.name,
     required this.imageUrl,
@@ -238,7 +105,7 @@ class _ChatGroupCardState extends State<ChatGroupCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GroupChatScreen(groupId: widget.groupId),
+            builder: (context) => GroupChatScreen(groupId: widget.groupId,username: widget.username,userID: widget.userID,),
           ),
         );
       },
@@ -298,8 +165,11 @@ class _ChatGroupCardState extends State<ChatGroupCard> {
 
 class GroupChatScreen extends StatefulWidget {
   final String groupId;
+  final String username;
 
-  GroupChatScreen({Key? key, required this.groupId}) : super(key: key);
+  final String userID;
+
+  GroupChatScreen({Key? key, required this.groupId, required this.username,required this.userID}) : super(key: key);
 
   @override
   _GroupChatScreenState createState() => _GroupChatScreenState();
@@ -312,6 +182,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFFF6B95D),
         title: Text("Group Chat"),
       ),
       body: Column(
@@ -331,7 +202,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                       final message = snapshot.data!.docs[index];
                       return ListTile(
                         leading: CircleAvatar(
-                          child: Text(message['senderUsername'][0]),
+                          child: Text(message['senderUsername'][0].toString().toUpperCase()),
                         ),
                         title: Text(message['senderUsername']),
                         subtitle: Text(message['content']),
@@ -344,7 +215,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.fromLTRB(10, 0, 5, 30),
             child: Row(
               children: [
                 Expanded(
@@ -366,8 +237,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                       // Replace 'userId' and 'username' with the actual sender's UID and username.
                       await sendMessageToGroup(
                         groupId: widget.groupId,
-                        senderUid: 'userId',
-                        senderUsername: 'username',
+                        senderUid: widget.userID,
+                        senderUsername: widget.username,
                         content: content,
                       );
                       _messageController.clear();

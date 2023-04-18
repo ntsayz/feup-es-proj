@@ -21,7 +21,7 @@ class MainScreen extends StatefulWidget {
   User user;
   MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
-  List<Map<String, dynamic>>? userGroups;
+
 
 
   //late List<Map<String, dynamic>> _dataList = [];
@@ -101,7 +101,6 @@ class _MainScreenState extends State<MainScreen> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
-        getMessagesData();
     }
   }
 
@@ -110,23 +109,7 @@ class _MainScreenState extends State<MainScreen> {
         widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
       });
     }
-  void getMessagesData() async {
-    List<String> userGroupIds = await getUIDGroups(widget.user.uid);
-    List<Map<String, dynamic>> fetchedGroups = [];
 
-    for (String groupId in userGroupIds) {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('groups').doc(groupId).get();
-      if (snapshot.exists) {
-        Map<String, dynamic> groupData = snapshot.data() as Map<String, dynamic>;
-        groupData['groupId'] = groupId; // Add groupId to the group data
-        fetchedGroups.add(groupData);
-      }
-    }
-
-    setState(() {
-      widget.userGroups = fetchedGroups;
-    });
-  }
 
 
 
@@ -224,7 +207,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(uid: widget.uid, userData: widget.userData) ));
   }
   void Messages(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(uid: widget.uid, userData: widget.userData,dataList: widget._event_group_list,) ));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(user: widget.user,userData: widget.userData,) ));
   }
   void CreateEvent(BuildContext context){
     //Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen()));
