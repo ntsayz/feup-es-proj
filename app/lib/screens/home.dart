@@ -21,6 +21,8 @@ class MainScreen extends StatefulWidget {
   User user;
   MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
+  List<Map<String, dynamic>>? userGroups;
+
 
   //late List<Map<String, dynamic>> _dataList = [];
   //TODO: Evenets and groups should be separated from each other
@@ -90,6 +92,7 @@ class _MainScreenState extends State<MainScreen> {
 
 
 
+
   @override
   void initState()  {
     super.initState();
@@ -98,11 +101,7 @@ class _MainScreenState extends State<MainScreen> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
-        getEventsDataMock();
-        setState(() {
-            getEventsDataMock();
-        });
-
+        getMessagesData();
     }
   }
 
@@ -111,14 +110,26 @@ class _MainScreenState extends State<MainScreen> {
         widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
       });
     }
-    void getMessagesData() async{
-      FirebaseFirestore.instance.collection('groups').get().then((querySnapshot) {
-        widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
-      });
-    }
-    void getEventsDataMock() async {
+  void getMessagesData() async {
+    List<String> userGroupIds = await getUIDGroups(widget.user.uid);
+    List<Map<String, dynamic>> fetchedGroups = [];
 
+    for (String groupId in userGroupIds) {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('groups').doc(groupId).get();
+      if (snapshot.exists) {
+        Map<String, dynamic> groupData = snapshot.data() as Map<String, dynamic>;
+        groupData['groupId'] = groupId; // Add groupId to the group data
+        fetchedGroups.add(groupData);
+      }
     }
+
+    setState(() {
+      widget.userGroups = fetchedGroups;
+    });
+  }
+
+
+
 
 
 

@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trabalho/screens/components/Header.dart';
 import 'package:trabalho/screens/components/Search_bar.dart';
-import 'package:trabalho/screens/components/widgets.dart';
-import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/components/ChatGroupCards.dart';
 
@@ -109,3 +106,5 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
 
 }
+
+
