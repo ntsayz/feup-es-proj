@@ -13,6 +13,16 @@ class groupScreen extends StatefulWidget {
 }
 
 class _groupScreenState extends State<groupScreen> {
+
+  int _counter = 0;
+
+  void _reloadPAge(){
+    setState(() {
+      _counter = _counter +1;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
@@ -51,6 +61,12 @@ class _groupScreenState extends State<groupScreen> {
                       },
                     ),
                   ),
+                  YellowButton(
+                    text: "ADD ELEMENT",
+                    height: 50,
+                    width: double.infinity,
+                    onItemTapped: () => addElement(),
+                  )
                 ],
               ),
             ),
@@ -59,6 +75,75 @@ class _groupScreenState extends State<groupScreen> {
       },
     );
   }
+
+
+  TextEditingController _IDController = TextEditingController();
+
+  void addElement(){
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('What´s the username?'),
+          content: TextField(
+            controller: _IDController,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(hintText: 'USERNAME'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('CANCEL'),
+              onPressed: () {
+                _IDController.clear();
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () async {
+                String? cont = await getUserUID(_IDController.text);
+
+                if (cont!=null) {
+                  _IDController.clear();
+                  addUIDToGroup(cont, widget.uid);
+                  Navigator.of(context).pop();
+                  _reloadPAge();
+                }
+                else{
+
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Container(
+                        height: 90,
+                        decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        child:
+                        Row(
+                            children: [
+                              const SizedBox( width: 35,),
+                              Expanded(child: Row(
+                                children: const [
+                                  Text("User not found", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                                ],
+                              ) )
+                            ]
+                        )
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ));
+                }
+            },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
+
 }
 
 
