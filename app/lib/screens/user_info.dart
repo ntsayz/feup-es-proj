@@ -8,8 +8,8 @@ import 'package:trabalho/screens/components/widgets.dart';
 
 class UserInformations extends StatefulWidget {
 
-
-  const UserInformations({Key? key, required this.uid}) : super(key: key);
+  User user;
+  UserInformations({Key? key, required this.uid,required this.user}) : super(key: key);
 
   final uid;
 
@@ -114,7 +114,7 @@ class _UserInformationsState extends State<UserInformations> {
                     borderRadius: BorderRadius.circular(30.0)
                 ),
                 onPressed: () {
-                    addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim());
+                    addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim(),widget.user);
 
                 })
 
@@ -137,7 +137,7 @@ class _UserInformationsState extends State<UserInformations> {
 
 
 
-addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user) async {
+addUserDetails (BuildContext context, DateTime date, String uid, String name, String phone, String user,User currentuser) async {
   bool isAvaible = await usernameAvaible(user);
   bool phoneAvaible = await phoneNumberUsed(phone);
 
@@ -198,7 +198,7 @@ addUserDetails (BuildContext context, DateTime date, String uid, String name, St
       'Username': user,
     });
     return Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MainScreen(uid: uid)));
+        MaterialPageRoute(builder: (context) => MainScreen(uid: uid,user:currentuser,)));
   }
 
 

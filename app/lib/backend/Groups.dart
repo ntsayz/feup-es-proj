@@ -108,3 +108,47 @@ Future<String?> getUserName (String ID) async{
     throw Exception('Document not found');
   }
 }
+
+Future<String?> getUserUID(String username) async {
+  final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+  await FirebaseFirestore.instance.collection('user').get();
+
+  for (final DocumentSnapshot<Map<String, dynamic>> document
+  in querySnapshot.docs) {
+    final data = document.data();
+    if (data != null && data.containsKey('Username') &&
+        data['Username'] == username) {
+      return document.id;
+    }
+  }
+  return null;
+}
+
+
+
+Future<String?> getUserByUsername(String username) async {
+  final usersCollection = FirebaseFirestore.instance.collection('user');
+
+
+
+  final userQuery = await usersCollection.where('Username', isEqualTo: username).get();
+  print (userQuery.docs.first);
+  if (userQuery.docs.isNotEmpty) {
+    return userQuery.docs.first.id;
+  } else {
+    return null;
+  }
+
+}
+
+
+Future<List<Map<String, dynamic>>> getGroupMessages(String groupId) async {
+  QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+      .collection('groups')
+      .doc(groupId)
+      .collection('messages')
+      .get();
+
+  List<Map<String, dynamic>> messages = querySnapshot.docs.map((doc) => doc.data()).toList();
+  return messages;
+}

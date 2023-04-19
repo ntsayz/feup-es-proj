@@ -21,6 +21,18 @@ class MyTeams extends StatefulWidget {
 class _MyTeamsState extends State<MyTeams> {
   TextEditingController _groupnamecontroller = TextEditingController();
 
+
+  int _counter = 0;
+
+  void _reloadPAge(){
+    setState(() {
+      _counter = _counter +1;
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
@@ -31,10 +43,38 @@ class _MyTeamsState extends State<MyTeams> {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           // if the future encountered an error, show an error message
-          return Center(child: Text('Error22: ${snapshot.error}'));
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text("You don´t have any groups yet. Create one if you want"),
+                SizedBox(height: 16),
+                YellowButton(
+                  text: "CREATE GROUP",
+                  height: 50,
+                  width: double.infinity,
+                  onItemTapped: () => newGroupName(),
+                ),
+              ],
+            ),
+          );
         } else if (!snapshot.hasData) {
           // if the future completed but returned no data, show an empty message
-          return Center(child: Text('No data found'));
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text("You don´t have any groups yet. Create one if you want"),
+                SizedBox(height: 16),
+                YellowButton(
+                  text: "CREATE GROUP",
+                  height: 50,
+                  width: double.infinity,
+                  onItemTapped: () => newGroupName(),
+                ),
+              ],
+            ),
+          );
         } else {
           // if the future completed and returned data, build the UI with the data
           List<String> groups = snapshot.data!;
@@ -87,14 +127,17 @@ class _MyTeamsState extends State<MyTeams> {
             TextButton(
               child: Text('CANCEL'),
               onPressed: () {
+                _groupnamecontroller.clear();
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text('OK'),
               onPressed: () {
+                _groupnamecontroller.clear();
                 createGroup(_groupnamecontroller.text, widget.uid); //TODO
                 Navigator.of(context).pop();
+                _reloadPAge();
               },
             ),
           ],
