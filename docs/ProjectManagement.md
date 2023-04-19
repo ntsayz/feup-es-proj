@@ -41,7 +41,14 @@ features, and try to do what we previously have committed to do. So, for this it
 Contrary to what happened on the last iteration, this week made a positive development. We implemented the groups page, which will contain 
 the events and other possible posts, and we can see the users of the group and add elements. Besides that, we implemented the 
 messages feature inside the groups, so users can chat inside between them inside a group (this feature was not planned, we made it as a plus for this iteration).
+Finally we added a parameter to our profile screen so the user could make changes to their personal information.
 
+So, by the end of this stage, this is how our project looks like:
+
+![Board after iterarion 2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/eaa0d648e8d02b73d149cac144893c37666db69e/images/iteration_2_board.png)
+
+
+* Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
 
 
 You can find below information and references related with the project management in our team: 
