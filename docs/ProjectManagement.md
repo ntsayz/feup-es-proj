@@ -16,6 +16,8 @@ Looking backwards on the first moment of the app, we were able to link our app t
 
 Most important of all, we began to work with flutter, which will helps us in the future of our project, leading to quicker implementation.
 
+* Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
+
 
 #### **Iteration 1**
 
@@ -23,14 +25,24 @@ Most important of all, we began to work with flutter, which will helps us in the
 
 For this iteration we tried to be a bit more ambicious and start to work on the specifities of our app, such as the creation of an event. Besides that in this iteration we will continue to work on the connection between our code and the database with the creation of a group of users. We had a meeting to review what had been done and to discuss what we should in this next moment. We decided in this meeting to split the work into groups.
 
+#### *Retrospective*
+
+This iteration has clearly to be evaluated negatively, due to lack of development on the app. During this time no features were added.
 
 
+#### **Iteration 2**
+
+Given the poor development done in the last delivery of our assignment, for this iteration we decided not to add any more 
+features, and try to do what we previously have committed to do. So, for this iteration we had no more features beyond our last iteration ones.
 
 
+#### *Retrospective*
+
+At the end of this week, we implemented the planned features, resulting a more positive frame for us. The groups were created, 
+each user has the groups that he belongs to, and inside each group it is possible to add an element by an username.
 
 You can find below information and references related with the project management in our team: 
 
+* Iteration planning and retrospectives: 
 * Backlog management: Product backlog and Iteration backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2022-23/projects/19/views/1);
 * Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
-* Iteration planning and retrospectives: 
-  [Iteration 1 (TODO)]();
