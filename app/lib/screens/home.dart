@@ -22,10 +22,6 @@ class MainScreen extends StatefulWidget {
   MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
 
-
-
-  //late List<Map<String, dynamic>> _dataList = [];
-  //TODO: Evenets and groups should be separated from each other
   List<Map<String, dynamic>>_event_group_list =  [
   {
     "name": "Grupo de Futebol",
@@ -81,8 +77,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-
 
   int _selectedIndex = 0;
   late String fullname = "" ;
@@ -204,8 +198,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void Profile(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(uid: widget.uid, userData: widget.userData) ));
-  }
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(uid: widget.uid, userData: widget.userData) ));}
+
   void Messages(BuildContext context){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagesScreen(user: widget.user,userData: widget.userData,) ));
   }
@@ -213,18 +207,3 @@ class _MainScreenState extends State<MainScreen> {
     //Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen()));
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

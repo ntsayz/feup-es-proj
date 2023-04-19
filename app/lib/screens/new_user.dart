@@ -82,8 +82,10 @@ class _NewUserScreenState extends State<NewUserScreen> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _passwordController2 = TextEditingController();
+    TextEditingController _birthdateController = TextEditingController();
 
-    var _isObscured =true;
+
+  var _isObscured =true;
   var _isObscured2 =true;
 
   @override
@@ -96,50 +98,46 @@ class _NewUserScreenState extends State<NewUserScreen> {
   @override
   Widget build(BuildContext context) {
 
-
-
-
-
     return Padding(
       padding: const EdgeInsets.all (16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            const Text("Enter your email"),
-        TextField(
-        controller: _emailController,
-        keyboardType: TextInputType.emailAddress,
-        decoration: const InputDecoration(
-            hintText: "USER EMAIL",
-            prefixIcon: Icon(Icons.mail)
+          const Text("Enter your email"),
+          TextField(
+            controller: _emailController,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+                hintText: "USER EMAIL",
+                prefixIcon: Icon(Icons.mail)
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 20
-        ),
-        const Text("Enter your password"),
-        TextField(
-          obscureText: _isObscured,
-          controller: _passwordController,
-          decoration: InputDecoration(
-              suffixIcon: IconButton(
-                icon: _isObscured
-                    ?const Icon(Icons.visibility)
-                    : const Icon(Icons.visibility_off),
-                onPressed: () {
-                  setState(() {
-                    _isObscured =!_isObscured;
-                  });
-                },
-              ),
-              hintText: "PASSWORD",
-              prefixIcon: Icon(Icons.lock)
-          )
-        ),
-        const SizedBox(
-          height: 20,
-        ),
+          const SizedBox(
+              height: 20
+          ),
+          const Text("Enter your password"),
+          TextField(
+              obscureText: _isObscured,
+              controller: _passwordController,
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    icon: _isObscured
+                        ? const Icon(Icons.visibility)
+                        : const Icon(Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isObscured = !_isObscured;
+                      });
+                    },
+                  ),
+                  hintText: "PASSWORD",
+                  prefixIcon: Icon(Icons.lock)
+              )
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           const Text("Confirm your password"),
           TextField(
               obscureText: _isObscured2,
@@ -149,53 +147,53 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   prefixIcon: Icon(Icons.lock),
                   suffixIcon: IconButton(
                     icon: _isObscured2
-                        ?const Icon(Icons.visibility)
+                        ? const Icon(Icons.visibility)
                         : const Icon(Icons.visibility_off),
                     onPressed: () {
                       setState(() {
-                        _isObscured2 =!_isObscured2;
+                        _isObscured2 = !_isObscured2;
                       });
                     },
                   )
               )
           ),
-        const SizedBox(
-          height: 30,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: RawMaterialButton(
-            fillColor: Colors.blue,
-           shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(12.0)
-             ),
-            onPressed: () async {
+          const SizedBox(
+            height: 30,
+          ),
+          SizedBox(
+              width: double.infinity,
+              child: RawMaterialButton(
+                fillColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)
+                ),
+                onPressed: () async {
 
-              final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(_emailController.text);
+                  final list = await FirebaseAuth.instance.fetchSignInMethodsForEmail(_emailController.text);
 
-              if (list.isNotEmpty){
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Container(
-                      height: 90,
-                      decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                      child:
-                      Row(
-                          children: [
-                            const SizedBox( width: 35,),
-                            Expanded(child: Row(
-                              children: const [
-                                Text("Email already in use", style: TextStyle(fontSize: 18, color: Colors.white),)
+                  if (list.isNotEmpty){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Container(
+                          height: 90,
+                          decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                          child:
+                          Row(
+                              children: [
+                                const SizedBox( width: 35,),
+                                Expanded(child: Row(
+                                  children: const [
+                                    Text("Email already in use", style: TextStyle(fontSize: 18, color: Colors.white),)
 
-                              ],
-                            ) )
-                          ]
-                      )
-                  ),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                ));
-              }
+                                  ],
+                                ) )
+                              ]
+                          )
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ));
+                  }
 
 
               else if (_passwordController.text.length <=6 || _passwordController2.text.length <=6){
@@ -234,7 +232,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
                               const SizedBox( width: 35,),
                               Expanded(child: Row(
                                 children: const [
-                                  Text("Passwords are not tha same", style: TextStyle(fontSize: 18, color: Colors.white),)
+                                  Text("Passwords are not the same", style: TextStyle(fontSize: 18, color: Colors.white),)
 
                                 ],
                               ) )
@@ -255,10 +253,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserInformations(uid: user.uid.toString(),user: user,)));
                 }
               }
-
-
-
-
 
 
              /* else{
@@ -288,7 +282,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
             elevation: 0.0,
             padding: const EdgeInsets.symmetric(vertical: 20.0),
 
-            child: const Text("Create USer"),
+            child: const Text("Create User"),
 
 
           )
@@ -298,12 +292,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
       ),
 
 
-
-
     );
-
-
-
 
     return const Placeholder();
   }
