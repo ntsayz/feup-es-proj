@@ -16,44 +16,67 @@ class GroupScreen extends StatefulWidget {
 }
 
 class _GroupScreenState extends State<GroupScreen> {
+
   @override
     Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-           child: Center(
-              child: Column(
-                children: [
-                  SizedBox(height: 80,),
-                  Container(
-                    width: 100.0,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => usersOfFroupScreen(uid: widget.groupuid),
-                            ),
-                          );
-                        },
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Icon(Icons.account_circle),
-                              Text("Elements"),
-                            ],
+        return FutureBuilder<String?>(
+          future: getGroupName(widget.groupuid),
+          builder: (context, AsyncSnapshot<String?> snapshot) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 50,),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          snapshot.data!.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
-                        )),
+                        ),
+                      ),
+                      Container(
+                        width: 95.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => usersOfFroupScreen(uid: widget.groupuid),
+                              ),
+                            );
+                          },
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Icon(Icons.account_circle),
+                                Text("Elements"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text("IN HERE GOES THE EVENTS AND OTHER THINGS WE MAY WANT, BUT HAVE NOT BEEN CREATED")
-                ],
+
+                  SizedBox( height: 20,),
+                      Text("IN HERE GOES THE EVENTS AND OTHER THINGS WE MAY WANT, BUT HAVE NOT BEEN CREATED")
+                    ],
+                  ),
+                ),
+
+
               ),
-            ),
-
-
-        ),
-      );
-    }
+            );
+          }
+        );
+      }
 }
 
