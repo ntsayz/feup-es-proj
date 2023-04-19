@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           borderRadius: BorderRadius.circular(40),
                           color: Colors.white,
                         ),
-                        child: BirthDateSelector(),
+                        child: BirthDateSelector(uid: widget.uid),
                       ),
                       SizedBox(height: 40),
                       ElevatedButton(

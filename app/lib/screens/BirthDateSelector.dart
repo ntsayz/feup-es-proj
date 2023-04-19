@@ -1,26 +1,40 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BirthDateSelector extends StatefulWidget {
+
+  final String uid;
+
+  const BirthDateSelector({Key? key, required this.uid}) : super(key: key);
+
+
   @override
   _BirthDateSelectorState createState() => _BirthDateSelectorState();
 }
 
 class _BirthDateSelectorState extends State<BirthDateSelector> {
   DateTime? _selectedDate;
+  DateTime _dateTime  = DateTime.now();
+  var formatter = new DateFormat('dd-MM-yyyy');
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+
+  Future<DateTime> _selectDate() async {
+    DateTime? selectedDate = await showDatePicker(
       context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(1900),
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
       lastDate: DateTime.now(),
     );
-    if (picked != null && picked != _selectedDate) {
+
+    if (selectedDate != null) {
       setState(() {
-        _selectedDate = picked;
+        _dateTime = selectedDate;
       });
     }
+
+    updateInfo(_dateTime, widget.uid.toString());
+    return selectedDate ?? DateTime.now();
   }
 
   @override
@@ -28,17 +42,22 @@ class _BirthDateSelectorState extends State<BirthDateSelector> {
     return Row(
       children: [
         Expanded(
-          child: Text(
-            _selectedDate == null
-                ? 'Select your birth date'
-                : 'Birth date: ${DateFormat('dd/MM/yyyy').format(_selectedDate!)}',
-          ),
-        ),
-        IconButton(
-          icon: Icon(Icons.calendar_today),
-          onPressed: () => _selectDate(context),
-        ),
+          child: TextFormField(
+
+    decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
+    icon: Icon(Icons.calendar_today)),
+    readOnly: true,
+    onTap: () => _selectDate(),
+    ))
       ],
     );
   }
 }
+
+updateInfo(DateTime date, String uid){
+  FirebaseFirestore.instance.collection('user').doc(uid).update({
+    'Birth Date': date,
+  });
+  return 0;
+}
+
