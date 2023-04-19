@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/backend/Groups.dart';
+import 'package:trabalho/screens/Group_page.dart';
 import 'package:trabalho/screens/components/widgets.dart';
-import 'package:trabalho/screens/group_screen.dart';
+import 'package:trabalho/screens/users_of_group.dart';
 
 
 
@@ -165,7 +166,7 @@ class GroupButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => groupScreen(uid: groupId),
+                  builder: (context) => GroupScreen(groupuid: groupId),
                 ),
               );
             },

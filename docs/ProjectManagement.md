@@ -38,8 +38,11 @@ features, and try to do what we previously have committed to do. So, for this it
 
 #### *Retrospective*
 
-At the end of this week, we implemented the planned features, resulting a more positive frame for us. The groups were created, 
-each user has the groups that he belongs to, and inside each group it is possible to add an element by an username.
+Contrary to what happened on the last iteration, this week made a positive development. We implemented the groups page, which will contain 
+the events and other possible posts, and we can see the users of the group and add elements. Besides that, we implemented the 
+messages feature inside the groups, so users can chat inside between them inside a group (this feature was not planned, we made it as a plus for this iteration).
+
+
 
 You can find below information and references related with the project management in our team: 
 

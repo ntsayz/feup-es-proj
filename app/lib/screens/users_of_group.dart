@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:trabalho/backend/Groups.dart';
 import 'components/widgets.dart';
 
-class groupScreen extends StatefulWidget {
+class usersOfFroupScreen extends StatefulWidget {
   final String uid;
 
-  const groupScreen({Key? key, required this.uid}) : super(key: key);
+  const usersOfFroupScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
-  State<groupScreen> createState() => _groupScreenState();
+  State<usersOfFroupScreen> createState() => _usersOfFroupScreenState();
 }
 
-class _groupScreenState extends State<groupScreen> {
+class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
 
   int _counter = 0;
 
