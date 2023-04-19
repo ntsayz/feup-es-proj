@@ -6,6 +6,9 @@ import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/new_user.dart';
 import 'package:trabalho/screens/home.dart';
 import 'package:trabalho/screens/reset_password.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+
 
 
 void main() {
@@ -73,37 +76,40 @@ class _LoginScreenState extends State<LoginScreen>{
   var _isObscured=true;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _birthdateController = TextEditingController();
 
-
-
-
-
-  static Future<User?> loginUsingEmailPassword({required String email, required String password, required BuildContext context}) async {
+  static Future<User?> loginUsingEmailPassword({required String email, required String password, required String birthDate, required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     try{
       UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
-      user=userCredential.user;
-    }on FirebaseAuthException catch(e){
-      if (e.code=="user-not-found"){
+      user = userCredential.user;
+      if(user != null) {
+        // add birthdate to user data
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'birthdate': birthDate,
+        }, SetOptions(merge: true));
+      }
+    } on FirebaseAuthException catch(e){
+      if (e.code == "user-not-found"){
         print ("No user found for that email");
       }
     }
-    return user;
 
+    return user;
   }
 
   @override
   void dispose(){
+    _emailController.dispose();
     _passwordController.dispose();
+    _birthdateController.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -111,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen>{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 120,),
-
           const Text("Enter your mail"),
           TextField(
             controller: _emailController,
@@ -131,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen>{
             decoration: InputDecoration(
                 hintText: "PASSWORD",
                 prefixIcon: Icon(Icons.lock),
-              suffixIcon: IconButton(
+                suffixIcon: IconButton(
                   icon: _isObscured
                       ?const Icon(Icons.visibility)
                       : const Icon(Icons.visibility_off),
@@ -140,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen>{
                       _isObscured =!_isObscured;
                     });
                   },
-            )),
+                )),
           ),
           const SizedBox(
             height: 20,
@@ -162,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen>{
                   borderRadius: BorderRadius.circular(12.0)
               ),
               onPressed: () async {
-                User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+                User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, birthDate: "1990-01-01",context: context);
                 print (user);
 
                 if (user!=null){
@@ -198,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen>{
             )
             ,),
           const SizedBox(
-            height: 130,
+            height: 100,
           ),
           Align(
               alignment: Alignment.center,
