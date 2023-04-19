@@ -22,7 +22,7 @@ class MainScreen extends StatefulWidget {
   MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
 
-  List<Map<String, dynamic>>_dataList =  [
+  List<Map<String, dynamic>>_event_group_list =  [
   {
     "name": "Grupo de Futebol",
     "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
