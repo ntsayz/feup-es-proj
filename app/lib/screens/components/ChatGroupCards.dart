@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trabalho/backend/Groups.dart';
 
 class ChatGroupCards extends StatefulWidget {
   User user;
@@ -180,76 +181,81 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF6B95D),
-        title: Text("Group Chat"),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: streamMessagesInGroup(widget.groupId),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      final message = snapshot.data!.docs[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          child: Text(message['senderUsername'][0].toString().toUpperCase()),
-                        ),
-                        title: Text(message['senderUsername']),
-                        subtitle: Text(message['content']),
-                        trailing: Text(message['time'].toDate().toString()),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
+    return FutureBuilder<String?>(
+      future: getGroupName(widget.groupId),
+      builder: (context, AsyncSnapshot<String?> snapshot) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xFFF6B95D),
+            title: Text(snapshot.data!.toUpperCase()),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 5, 30),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: "Type your message...",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () async {
-                    String content = _messageController.text.trim();
-                    if (content.isNotEmpty) {
-                      // Replace 'userId' and 'username' with the actual sender's UID and username.
-                      await sendMessageToGroup(
-                        groupId: widget.groupId,
-                        senderUid: widget.userID,
-                        senderUsername: widget.username,
-                        content: content,
+          body: Column(
+            children: [
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: streamMessagesInGroup(widget.groupId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final message = snapshot.data!.docs[index];
+                          return ListTile(
+                            leading: CircleAvatar(
+                              child: Text(message['senderUsername'][0].toString().toUpperCase()),
+                            ),
+                            title: Text(message['senderUsername']),
+                            subtitle: Text(message['content']),
+                            trailing: Text(message['time'].toDate().toString()),
+                          );
+                        },
                       );
-                      _messageController.clear();
                     }
                   },
                 ),
-              ],
-            ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 5, 30),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _messageController,
+                        decoration: InputDecoration(
+                          hintText: "Type your message...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () async {
+                        String content = _messageController.text.trim();
+                        if (content.isNotEmpty) {
+                          // Replace 'userId' and 'username' with the actual sender's UID and username.
+                          await sendMessageToGroup(
+                            groupId: widget.groupId,
+                            senderUid: widget.userID,
+                            senderUsername: widget.username,
+                            content: content,
+                          );
+                          _messageController.clear();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
