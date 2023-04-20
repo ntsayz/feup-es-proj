@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/main.dart';
 
 
 final FirebaseAuth _auth = FirebaseAuth.instance;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trabalho/screens/BirthDateSelector.dart';
 import 'package:trabalho/screens/components/appicon.dart';
-import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/main.dart';
 import 'profilepicture.dart';
 import 'MyDropdownmenu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

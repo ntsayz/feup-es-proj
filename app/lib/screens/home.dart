@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
-import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/main.dart';
 import 'package:trabalho/screens/my_teams.dart';
 import 'package:trabalho/backend/Groups.dart';
 
