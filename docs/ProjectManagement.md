@@ -48,7 +48,7 @@ So, by the end of this stage, this is how our project looks like:
 ![Board after iterarion 2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/eaa0d648e8d02b73d149cac144893c37666db69e/images/iteration_2_board.png)
 
 
-* Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
+* Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2)
 
 
 You can find below information and references related with the project management in our team: 
@@ -56,3 +56,4 @@ You can find below information and references related with the project managemen
 * Iteration planning and retrospectives: 
 * Backlog management: Product backlog and Iteration backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2022-23/projects/19/views/1);
 * Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
+* Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2);
