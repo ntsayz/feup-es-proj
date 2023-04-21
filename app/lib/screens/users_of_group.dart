@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/backend/Groups.dart';
+import 'package:trabalho/screens/remove_users.dart';
 import 'components/widgets.dart';
 
 class usersOfFroupScreen extends StatefulWidget {
+  final String groupID;
   final String uid;
 
-  const usersOfFroupScreen({Key? key, required this.uid}) : super(key: key);
+  const usersOfFroupScreen({Key? key, required this.groupID, required this.uid}) : super(key: key);
 
   @override
   State<usersOfFroupScreen> createState() => _usersOfFroupScreenState();
@@ -22,11 +24,13 @@ class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
     });
   }
 
+  // List to keep track of selected users
+  List<String> selectedUsers = [];
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
-      future: getUsersofGroup(widget.uid),
+      future: getUsersofGroup(widget.groupID),
       builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // while the future is still running, show a loading indicator
@@ -61,11 +65,54 @@ class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
                       },
                     ),
                   ),
-                  YellowButton(
-                    text: "ADD ELEMENT",
-                    height: 50,
-                    width: double.infinity,
-                    onItemTapped: () => addElement(),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: () => addElement(),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF6B95D),
+                            foregroundColor: Colors.white,
+                          ),
+                          child:Text(
+                            "ADD ELEMENT",
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: 30,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: () => {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => removeUserScreen(groupID: widget.groupID, uid: widget.uid,),
+                          ),
+                          )
+
+                        },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF6B95D),
+                            foregroundColor: Colors.white,
+                          ),
+                          child:Text(
+                            "REMOVE ELEMENT",
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+
+                    ],
                   )
                 ],
               ),
@@ -75,6 +122,7 @@ class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
       },
     );
   }
+
 
 
   TextEditingController _IDController = TextEditingController();
@@ -105,7 +153,7 @@ class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
 
                 if (cont!=null) {
                   _IDController.clear();
-                  addUIDToGroup(cont, widget.uid);
+                  addUIDToGroup(cont, widget.groupID);
                   Navigator.of(context).pop();
                   _reloadPAge();
                 }
@@ -140,9 +188,6 @@ class _usersOfFroupScreenState extends State<usersOfFroupScreen> {
       },
     );
   }
-
-
-
 
 }
 

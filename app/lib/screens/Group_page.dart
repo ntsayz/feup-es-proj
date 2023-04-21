@@ -6,10 +6,10 @@ import 'components/widgets.dart';
 
 
 class GroupScreen extends StatefulWidget {
-  // final String uid;
+  final String uid;
   final String groupuid;
 
-  const GroupScreen({Key? key, required this.groupuid}) : super(key: key);
+  const GroupScreen({Key? key, required this.groupuid, required this.uid}) : super(key: key);
 
   @override
   State<GroupScreen> createState() => _GroupScreenState();
@@ -49,7 +49,7 @@ class _GroupScreenState extends State<GroupScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => usersOfFroupScreen(uid: widget.groupuid),
+                                builder: (context) => usersOfFroupScreen(groupID: widget.groupuid, uid: widget.uid),
                               ),
                             );
                           },

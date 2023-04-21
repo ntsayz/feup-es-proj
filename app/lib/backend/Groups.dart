@@ -28,6 +28,10 @@ Future<void> addUIDToGroup (String ID, String groupID) async{
   await _firestore.collection('user').doc(ID).update({'groups': FieldValue.arrayUnion([groupID])});
 }
 
+Future<void> removeUIDFromGroup (String ID, String groupID) async {
+  await _firestore.collection('groups').doc(groupID).update({'users': FieldValue.arrayRemove([ID])});
+}
+
 Future<void> addUserToGroup (User? user, String groupID) async{
   await _firestore.collection('groups').doc(groupID).update({'users': FieldValue.arrayUnion([user?.uid])});
 }
