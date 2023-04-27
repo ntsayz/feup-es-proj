@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trabalho/screens/main.dart';
+import 'package:trabalho/main.dart';
 
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -26,6 +26,10 @@ Future<void> createGroup(String name, String ID) async{
 Future<void> addUIDToGroup (String ID, String groupID) async{
   await _firestore.collection('groups').doc(groupID).update({'users': FieldValue.arrayUnion([ID])});
   await _firestore.collection('user').doc(ID).update({'groups': FieldValue.arrayUnion([groupID])});
+}
+
+Future<void> removeUIDFromGroup (String ID, String groupID) async {
+  await _firestore.collection('groups').doc(groupID).update({'users': FieldValue.arrayRemove([ID])});
 }
 
 Future<void> addUserToGroup (User? user, String groupID) async{

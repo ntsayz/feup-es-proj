@@ -92,7 +92,7 @@ class _MyTeamsState extends State<MyTeams> {
                     ),
                     itemCount: groups.length,
                     itemBuilder: (context, index) {
-                      return GroupButton(groupId: groups[index]);
+                      return GroupButton(groupId: groups[index], uid: widget.uid,);
                     },
                   ),
                 ),
@@ -152,8 +152,9 @@ class _MyTeamsState extends State<MyTeams> {
 
 class GroupButton extends StatelessWidget {
   final String groupId;
+  final String uid;
 
-  const GroupButton({required this.groupId});
+  const GroupButton({required this.groupId, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +167,7 @@ class GroupButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GroupScreen(groupuid: groupId),
+                  builder: (context) => GroupScreen(groupuid: groupId, uid: uid,),
                 ),
               );
             },
