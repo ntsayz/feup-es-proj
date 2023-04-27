@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trabalho/screens/places.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
 import 'package:trabalho/screens/main.dart';
 import 'package:trabalho/screens/my_teams.dart';
-import 'package:trabalho/backend/Groups.dart';
 
 //Common Widgets
 import 'package:trabalho/screens/components//Header.dart';
@@ -185,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               MyTeams(uid: widget.uid, userData: widget.userData),
               CustomAppBar(title: "LOCATION",),
-              CustomAppBar(title: "PLACES",),
+              PlacesScreen(uid: widget.uid, userData: widget.userData),
             ],
           ),
         ),
