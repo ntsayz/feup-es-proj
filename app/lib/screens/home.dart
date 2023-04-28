@@ -5,6 +5,7 @@ import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
 import 'package:trabalho/main.dart';
 import 'package:trabalho/screens/my_teams.dart';
+import 'package:trabalho/screens/maps.dart';
 import 'package:trabalho/backend/Groups.dart';
 
 //Common Widgets
@@ -184,7 +185,8 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
               MyTeams(uid: widget.uid, userData: widget.userData),
-              CustomAppBar(title: "LOCATION",),
+              // CustomAppBar(title: "LOCATION",),
+              MapPage(uid: widget.uid),
               CustomAppBar(title: "PLACES",),
             ],
           ),
