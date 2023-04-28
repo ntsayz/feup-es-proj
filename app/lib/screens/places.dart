@@ -16,12 +16,12 @@ class PlacesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Places'),
         backgroundColor: const Color(0xFFF6B95D),
-        leading: IconButton(
+/*        leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
-        ),
+        ),*/
       ),
       body: ListView(
         children: [
