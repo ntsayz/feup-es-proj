@@ -51,9 +51,31 @@ So, by the end of this stage, this is how our project looks like:
 * Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2)
 
 
+#### **Iteration 3**
+
+Taking advantage of the good line of work we had from the previous iteration, for this couple weeks we decided
+to continue with the good work and the improvement of our app. So, for this iteration we committed to start implementing
+the map in our application, so that we had a screen just to see a map, and in the future see the pins with events. 
+Additionally we also want to create a screen where I can see various locations and their evaluations from other users.
+
+![Iteration Backlog for iteration 3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d6887d3a7812f6f0b9f6c53742ade61e38d8c437/images/Iteration_3_backlog.png)
+
+#### *Retrospective*
+
+By the end of this iteration we can say that it was once again a positive development. We successfully implemented the 
+maps in our application, also, the users will be able to see what events are happening near them as well as filter
+by sport. Additionally we had our last screen missing, which was the places, where we can see places around us, 
+their comments and evaluations by other users.
+
+* Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3)
+
+
+
 You can find below information and references related with the project management in our team: 
 
 * Iteration planning and retrospectives: 
 * Backlog management: Product backlog and Iteration backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2022-23/projects/19/views/1);
 * Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
 * Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2);
+* Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3)
+
