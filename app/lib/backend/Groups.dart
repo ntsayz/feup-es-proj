@@ -98,6 +98,16 @@ Future<List<String>> getUsersofGroup (String ID) async{
   return stringArray;
 }
 
+Future<List<String>> getEventssofGroup (String ID) async{
+  final DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await FirebaseFirestore.instance.collection('groups').doc(ID).get();
+  final List<dynamic> arrayField = documentSnapshot.data()!['events'];
+  final List<String> stringArray = List<String>.from(arrayField.map((element) => element.toString()));
+  return stringArray;
+}
+
+
+
+
 Future<String?> getUserName (String ID) async{
   // Get a reference to the Firestore collection
   CollectionReference collectionReference = FirebaseFirestore.instance.collection('user');
