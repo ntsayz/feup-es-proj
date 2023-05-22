@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/users_of_group.dart';
 import 'components/widgets.dart';
+import 'package:trabalho/backend/event.dart';
+import 'package:intl/intl.dart';
+
 
 
 class GroupScreen extends StatefulWidget {
@@ -18,65 +22,322 @@ class GroupScreen extends StatefulWidget {
 class _GroupScreenState extends State<GroupScreen> {
 
   @override
-    Widget build(BuildContext context) {
-        return FutureBuilder<String?>(
-          future: getGroupName(widget.groupuid),
-          builder: (context, AsyncSnapshot<String?> snapshot) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 50,),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          snapshot.data!.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 95.0,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => usersOfFroupScreen(groupID: widget.groupuid, uid: widget.uid),
-                              ),
-                            );
-                          },
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Icon(Icons.account_circle),
-                                Text("Elements"),
-                              ],
+  Widget build(BuildContext context) {
+    return FutureBuilder<String?>(
+        future: getGroupName(widget.groupuid),
+        builder: (context, AsyncSnapshot<String?> snapshot) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(height: 50,),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            snapshot.data!.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                        Container(
+                          width: 95.0,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => usersOfFroupScreen(groupID: widget.groupuid, uid: widget.uid),
+                                ),
+                              );
+                            },
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Icon(Icons.account_circle),
+                                  Text("Elements"),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
 
-                  SizedBox( height: 20,),
-                      Text("IN HERE GOES THE EVENTS AND OTHER THINGS WE MAY WANT, BUT HAVE NOT BEEN CREATED")
-                    ],
-                  ),
+                    SizedBox( height: 20,),
+                    Center(child: Text("Events of the group:" ,  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 24,
+                          ),
+
+                    ),
+                    ),
+                    FutureBuilder<List<String>>(
+                        future: getEventssofGroup(widget.groupuid),
+                        builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot){
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              // while the future is still running, show a loading indicator
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            else{
+                              List<String> events = snapshot.data!;
+                              return Expanded(
+                                child: ListView.builder(
+                                  itemCount: events.length,
+                                  itemBuilder: (context, index) {
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      child: EventButton(groupId: widget.groupuid, uid:widget.uid , EventID: events[index],),
+                                    );
+                                  },
+                                ),
+                              );
+                            }
+                        }
+                    ),
+
+
+
+                  ],
                 ),
-
-
               ),
-            );
-          }
-        );
-      }
+
+
+            ),
+          );
+        }
+    );
+  }
 }
+
+
+
+class EventButton extends StatelessWidget {
+  final String groupId;
+  final String uid;
+  final String EventID;
+
+  const EventButton({required this.groupId, required this.uid, required this.EventID});
+
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> eventElements = [];
+    return FutureBuilder<String?>(
+      future: getEventName(EventID),
+      builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+        if (snapshot.hasData) {
+          return Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(
+                color: Colors.black, // Customize the border color here
+                width: 2.0, // Customize the border width here
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    snapshot.data!,
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  SizedBox(height: 16),
+
+                  Row(
+                    children: [
+                      Text(
+                        "Capacity: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      FutureBuilder<int?>(
+                        future: getEventCapacity(EventID),
+                        builder: (BuildContext context, AsyncSnapshot<int?> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            // While the future is loading, display a loading indicator or placeholder
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            // If an error occurred while fetching the data, display an error message
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            // If the future completed successfully, display the data
+                            if (snapshot.hasData) {
+                              return Container(
+                                child: Text(snapshot.data!.toString()),
+                              );
+                            } else {
+                              // Handle the case where the future returned null
+                              return Text('No data available');
+                            }
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 25,),
+
+                  Row(
+                    children: [
+                      Text(
+                        "Day: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      FutureBuilder<Timestamp?>(
+                        future: getEventDate(EventID),
+                        builder: (BuildContext context, AsyncSnapshot<Timestamp?> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            // While the future is loading, display a loading indicator or placeholder
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            // If an error occurred while fetching the data, display an error message
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            // If the future completed successfully, display the data
+                            if (snapshot.hasData) {
+                              return Container(
+                                child: Text(DateFormat.Hm().format(snapshot.data!.toDate()).toString()),
+                              );
+                            } else {
+                              // Handle the case where the future returned null
+                              return Text('No data available');
+                            }
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 25,),
+
+                  Row(
+                    children: [
+                      Text(
+                        "Sport: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),                      FutureBuilder<String?>(
+                        future: getEventSport(EventID),
+                        builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            // While the future is loading, display a loading indicator or placeholder
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            // If an error occurred while fetching the data, display an error message
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            // If the future completed successfully, display the data
+                            if (snapshot.hasData) {
+                              return Container(
+                                child: Text(snapshot.data!),
+                              );
+                            } else {
+                              // Handle the case where the future returned null
+                              return Text('No data available');
+                            }
+                          }
+                        },
+                      )
+                    ],
+                  ),
+
+
+                  ElevatedButton(
+                    onPressed: () async {
+                      eventElements = await EventElements(EventID);
+
+                      if (eventElements.contains(uid)) {
+                        removeElementEvent(uid, EventID);
+                      } else {
+                        addElementEvent(uid, EventID);
+                      }
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) => GroupScreen(groupuid: groupId, uid: uid)),
+                      );
+                    },
+                    child: Builder(
+                      builder: (BuildContext context) {
+                        if (eventElements.contains(uid)) {
+                          return Text("I'M OUT");
+                        } else {
+                          return Text("I'M IN");
+                        }
+                      },
+                    ),
+                  )
+
+
+
+
+
+
+                ],
+              ),
+            ));
+
+
+
+
+
+
+/*          return ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GroupScreen(groupuid: groupId, uid: uid,),
+                ),
+              );
+            },
+            child: Text(
+              snapshot.data!,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              onPrimary: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          );*/
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+
+  }
+
+
+  String contains(List<String> list, String ID){
+    if (list.contains(ID)){
+      print ("HEREEE");
+      return "I'M OUT";
+    }
+    else{
+      print ("ACTUALLLY");
+      return "I'M OUT";
+    }
+  }
+
+
+}
+
 
