@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trabalho/backend/event.dart';
 import 'package:trabalho/screens/places.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/messages.dart';
 import 'package:trabalho/main.dart';
 import 'package:trabalho/screens/my_teams.dart';
 import 'package:trabalho/screens/maps.dart';
+import 'package:trabalho/screens/create_event.dart';
 //Common Widgets
 import 'package:trabalho/screens/components//Header.dart';
 import 'package:trabalho/screens/components/Search_bar.dart';
@@ -180,7 +182,9 @@ class _MainScreenState extends State<MainScreen> {
                     ],
                   ),
                   EventCards(dataList: widget._event_group_list,),
-                  YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){CreateEvent(context);},),
+                  YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen(uid: widget.uid,) ));}
+    ),
                 ],
               ),
               MyTeams(uid: widget.uid, userData: widget.userData),

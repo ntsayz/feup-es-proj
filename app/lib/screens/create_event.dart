@@ -1,72 +1,265 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
+import 'package:intl/intl.dart';
+import 'package:trabalho/backend/event.dart';
+import 'package:trabalho/screens/home.dart';
+import 'package:trabalho/screens/components/widgets.dart';
+
+
 
 // Create a Form widget.
 class CreateEventScreen extends StatefulWidget {
-  const CreateEventScreen({super.key});
+  final String uid;
+  const CreateEventScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
-  CreateEventScreenState createState() {
-    return CreateEventScreenState();
-  }
+  State<CreateEventScreen> createState() => CreateEventScreenState();
 }
 
-// Create a corresponding State class.
-// This class holds data related to the form.
 class CreateEventScreenState extends State<CreateEventScreen> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
+
   final _formKey = GlobalKey<FormState>();
+
+
+  TextEditingController _sportController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _capacity = TextEditingController();
+  String? selectedItem;
+
+  TextEditingController _dateController = TextEditingController();
+  DateTime _dateTime  = DateTime.now();
+
+  Future<DateTime> _ShowDatePicker() async {
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2026),
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        _dateTime = selectedDate;
+        _dateController.text = formatter.format(selectedDate);
+      });
+    }
+
+    return selectedDate ?? DateTime.now();
+  }
+
+  var formatter = new DateFormat('dd-MM-yyyy');
+
+
+  TextEditingController _timeController = TextEditingController();
+  final DateFormat _timeFormatter = DateFormat('h:mm a');
+
+
+
+  void _showTimePicker() async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (pickedTime != null) {
+      setState(() {
+        _timeController.text = _timeFormatter.format(
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+            pickedTime.hour,
+            pickedTime.minute,
+          ),
+        );
+      });
+    }
+  }
+
+  void showSuccessScreenAndPop() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Success'),
+          content: Text('Your event has been created'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); // Pop the current screen
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("SPORT",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          TextFormField(
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
-                }
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
-      ),
-    );
+    return WillPopScope(
+      onWillPop: () async{
+        _timeController.clear();
+        _sportController.clear();
+        _nameController.clear();
+        _capacity.clear();
+        return true;},
+      child: Scaffold(
+        appBar: CustomAppBar(title: ("NEW EVENT"),),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child:
+            Column(
+              children: [
+                const Padding(padding: EdgeInsets.all(10.0),
+                  child: Text("Enter the name of the event"),),
+
+                TextFormField(
+                  controller: _nameController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                      hintText: "Name of the event",
+                      prefixIcon: Icon(Icons.sports_cricket)
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.all(10.0),
+                  child: Text("How many people are left?"),),
+
+                TextFormField(
+                  controller: _capacity,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      hintText: "Capacity",
+                      prefixIcon: Icon(Icons.person)
+                  ),
+                ),
+
+
+                const Padding(padding: EdgeInsets.all(10.0),
+                  child: Text("Choose a sport"),),
+
+                DropdownButton<String>(
+                  value: selectedItem,
+                  hint: Text('Select a sport'),
+                  itemHeight: 60, // Adjust the item height to make the dropdown larger
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'Football',
+                      child: Text('Football'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Padel',
+                      child: Text('Padel'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Running',
+                      child: Text('Running'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Gym',
+                      child: Text('Gym'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'Cycle',
+                      child: Text('Cycle'),
+                    ),
+                  ],
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedItem = newValue;
+                      _sportController.text = newValue ?? ''; // Set the selected value to the controller
+                    });
+                  },
+                ),
+                SizedBox(height: 20,),
+
+                const Padding(padding: EdgeInsets.all(10.0),
+                  child: Text("When is the event?"),),
+                TextFormField(
+                  controller: _dateController,
+                  decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
+                      icon: Icon(Icons.calendar_today)),
+                  readOnly: true,
+                  onTap: () => _ShowDatePicker(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text("What time is the event?"),
+                ),
+                TextFormField(
+                  controller: _timeController,
+                  decoration: InputDecoration(
+                    hintText: _timeFormatter.format(DateTime.now()),
+                    icon: Icon(Icons.access_time),
+                  ),
+                  readOnly: true,
+                  onTap: () => _showTimePicker(),
+                ),
+
+
+
+                SizedBox(height: 20,),
+                RawMaterialButton(
+                    padding: EdgeInsets.all(10.0),
+                    fillColor: Colors.blue,
+                    child: const Text('CREATE',
+                      style: TextStyle(fontSize: 20),),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)
+                    ),
+                    onPressed: () {
+                        if (_nameController.text.isEmpty || _capacity.text.isEmpty || _sportController.text.isEmpty || _dateTime.toString().isEmpty || _timeController.text.isEmpty ){
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Container(
+                                height: 90,
+                                decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                                child:
+                                Row(
+                                    children: [
+                                      const SizedBox( width: 35,),
+                                      Expanded(child: Row(
+                                        children: const [
+                                          Text("ALL FIELDS SHOULD BE FILLED", style: TextStyle(fontSize: 18, color: Colors.white),)
+
+                                        ],
+                                      ) )
+                                    ]
+                                )
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ));
+                        }
+                        else{
+                          DateTime timeSelected = joinDateTimeWithTime(_dateTime, _timeController);
+                          // addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim(),widget.user);
+                          createEvent(widget.uid, _nameController.text, int.parse(_capacity.text), _sportController.text, timeSelected);
+                          //Navigator.pop(context);
+                          showSuccessScreenAndPop();
+                        }
+                    })
+
+
+              ],
+            )),
+
+
+
+      ), );
+
+
+
+
+
+    return const Placeholder();
   }
 }

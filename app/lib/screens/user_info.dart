@@ -27,6 +27,7 @@ class _UserInformationsState extends State<UserInformations> {
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
 
+  TextEditingController _dateController = TextEditingController();
   DateTime _dateTime  = DateTime.now();
 
   Future<DateTime> _ShowDatePicker() async {
@@ -40,6 +41,7 @@ class _UserInformationsState extends State<UserInformations> {
     if (selectedDate != null) {
       setState(() {
         _dateTime = selectedDate;
+        _dateController.text = formatter.format(selectedDate);
       });
     }
 
@@ -47,6 +49,7 @@ class _UserInformationsState extends State<UserInformations> {
   }
 
   var formatter = new DateFormat('dd-MM-yyyy');
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,7 @@ class _UserInformationsState extends State<UserInformations> {
             const Padding(padding: EdgeInsets.all(20.0),
               child: Text("Enter your Birth Date"),),
             TextFormField(
-
+              controller: _dateController,
               decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
                   icon: Icon(Icons.calendar_today)),
               readOnly: true,

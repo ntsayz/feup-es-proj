@@ -4,6 +4,14 @@ import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/Group_page.dart';
 import 'package:trabalho/screens/components/widgets.dart';
 import 'package:trabalho/screens/users_of_group.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trabalho/screens/BirthDateSelector.dart';
+import 'package:trabalho/screens/components/appicon.dart';
+import 'package:trabalho/main.dart';
+import 'profilepicture.dart';
+import 'MyDropdownmenu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
@@ -30,6 +38,11 @@ class _MyTeamsState extends State<MyTeams> {
       _counter = _counter +1;
     });
   }
+
+  late String _username = "";
+
+
+
 
 
 
@@ -83,16 +96,42 @@ class _MyTeamsState extends State<MyTeams> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                appiconWidget(),
+                D8ddzukxuaaxldy1Widget(),
+                SizedBox(height: 10),
+                FutureBuilder<String?>(
+                  future: getUserName(widget.uid), // Call the getUserName function with the desired ID
+                  builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(); // Display a loading indicator while waiting for the result
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}'); // Display an error message if an error occurs
+                    } else {
+                      final username = snapshot.data ?? ""; // Get the result of the future
+                      return Text(
+                        username, // Use the username in the Text widget
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color.fromRGBO(113, 127, 127, 1),
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.normal,
+                          height: 1,
+                        ),
+                      );
+                    }
+                  },
+                ),
+                SizedBox(height: 20,),
                 Expanded(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
+                  child: ListView.builder(
                     itemCount: groups.length,
                     itemBuilder: (context, index) {
-                      return GroupButton(groupId: groups[index], uid: widget.uid,);
+                      return SizedBox(
+                        width: double.infinity,
+                        child: GroupButton(groupId: groups[index], uid: widget.uid),
+                      );
                     },
                   ),
                 ),
@@ -106,6 +145,8 @@ class _MyTeamsState extends State<MyTeams> {
               ],
             ),
           );
+
+
         }
       },
     );
@@ -135,8 +176,8 @@ class _MyTeamsState extends State<MyTeams> {
             TextButton(
               child: Text('OK'),
               onPressed: () {
-                _groupnamecontroller.clear();
                 createGroup(_groupnamecontroller.text, widget.uid); //TODO
+                _groupnamecontroller.clear();
                 Navigator.of(context).pop();
                 _reloadPAge();
               },
@@ -179,11 +220,19 @@ class GroupButton extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              onPrimary: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
           );
         } else {
           return Center(child: CircularProgressIndicator());
         }
       },
     );
+
   }
 }
