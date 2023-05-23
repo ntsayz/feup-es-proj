@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trabalho/backend/Groups.dart';
 
 class ChatGroupCards extends StatefulWidget {
@@ -170,6 +171,7 @@ class GroupChatScreen extends StatefulWidget {
 
   final String userID;
 
+
   GroupChatScreen({Key? key, required this.groupId, required this.username,required this.userID}) : super(key: key);
 
   @override
@@ -179,6 +181,7 @@ class GroupChatScreen extends StatefulWidget {
 class _GroupChatScreenState extends State<GroupChatScreen> {
   TextEditingController _messageController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String?>(
@@ -186,8 +189,16 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       builder: (context, AsyncSnapshot<String?> snapshot) {
         return Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             backgroundColor: const Color(0xFFF6B95D),
-            title: Text(snapshot.data!.toUpperCase()),
+            title: Text(snapshot.data?.toUpperCase() ?? ''),
+            // Use the null-aware operator '?.' to avoid accessing a null value.
+            // If snapshot.data is null, use an empty string instead.
           ),
           body: Column(
             children: [
@@ -200,17 +211,53 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
-                      return ListView.builder(
+                      return  ListView.builder(
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           final message = snapshot.data!.docs[index];
-                          return ListTile(
-                            leading: CircleAvatar(
-                              child: Text(message['senderUsername'][0].toString().toUpperCase()),
+                          final isCurrentUser = message['senderUsername'] == widget.username;
+                          return Container(
+                            alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: isCurrentUser ? Colors.blue : Colors.grey[300],
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(isCurrentUser ? 10 : 0),
+                                  topRight: Radius.circular(isCurrentUser ? 0 : 10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10),
+                                ),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    message['senderUsername'],
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: isCurrentUser ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    message['content'],
+                                    style: TextStyle(
+                                      color: isCurrentUser ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    DateFormat.jm().add_Md().format(message['time'].toDate()),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: isCurrentUser ? Colors.white54 : Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            title: Text(message['senderUsername']),
-                            subtitle: Text(message['content']),
-                            trailing: Text(message['time'].toDate().toString()),
                           );
                         },
                       );
