@@ -41,6 +41,7 @@ dependencies:
   geocoding: ^2.1.0
   glob: ^2.1.0
   flutter_gherkin: ^2.0.0
+  mockito: ^5.4.1
 
 dev_dependencies:
   flutter_test:
