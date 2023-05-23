@@ -83,11 +83,11 @@ As a user i want to send and receive messages from my groups so that we can talk
 
 **Screen to see all messages from all groups**
 
-<img width="200" alt = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/2757c517d1e5958e762f33cf05e26f9cb9f1ef7d/images/mock_messages%20screen.png">
+<img width="200" alt = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/ddb8b7c35fa8689712eac8e63065b87a8affe4b3/images/mock_messages%20screen.png">
 
 **Screen to see all messages sent and received from a group**
 
-<img width="200" alt = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/2757c517d1e5958e762f33cf05e26f9cb9f1ef7d/images/mock_message_group.png">
+<img width="200" alt = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/ddb8b7c35fa8689712eac8e63065b87a8affe4b3/images/mock_message_group.png">
 
 
 
