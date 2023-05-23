@@ -27,5 +27,5 @@ Mapa - interface onde se pode ver a localização e as diferentes informações 
 
 ### Assumptions and dependencies
 - Internet: manter a app atualizada sempre que ocorrem novas atividades.
-- GoogleMaps: para criar o mapa onde é possível ver as atividades que irão decorrer num futuro próximo (cada uma delas marcada com um pin).
+- OpenStreetMap: para criar o mapa onde é possível ver as atividades que irão decorrer num futuro próximo (cada uma delas marcada com um pin).
 - Firebase: guardar os dados de acesso de cada utilizador.

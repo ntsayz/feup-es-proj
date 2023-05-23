@@ -70,6 +70,30 @@ their comments and evaluations by other users.
 * Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3)
 
 
+#### **Iteration 4**
+
+For this final iteration and taking in account we had several things unfinished in our work, we tried to
+divide between our members who were working, to try to get the maximum of our work. So, we focused on the tests
+finishing what we could of our app and finish also all the documentation.
+
+
+
+#### *Retrospective*
+
+
+
+
+
+
+
+#### *Final Thoughts*
+Now that the work is all done and delivered, the active members of our group can by far say that we were 
+penalized by the lack of commitment by the other members. From the first iteration to the last only 3
+of our members helped actively in the development of the work, and that made things far more dificult to our group.
+
+
+
+
 
 You can find below information and references related with the project management in our team: 
 

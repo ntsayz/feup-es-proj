@@ -1,7 +1,7 @@
 ## Elevator Pitch
-Draft a small text to help you quickly introduce and describe your product in a short time and a few words (~800 characters), a technique usually known as elevator pitch.
 
-Take a look at the following links to learn some techniques:
-* [Crafting an Elevator Pitch](https://www.mindtools.com/pages/article/elevator-pitch.htm)
-* [The Best Elevator Pitch Examples, Templates, and Tactics - A Guide to Writing an Unforgettable Elevator Speech, by strategypeak.com](https://strategypeak.com/elevator-pitch-examples/)
-* [Top 7 Killer Elevator Pitch Examples, by toggl.com](https://blog.toggl.com/elevator-pitch-examples/)
+This the app for that sports people who don't want to practise alone or just a group of friends, who 
+has always a last minute withdrawal. Whether you are missing a teammate, a rival or just some friendly
+competition, our app gets you covered. With *SportStack* people can create events from one to unlimited
+capacity, join groups and have a lot of fun with your friends and new rivals to play with. 
+Challenge yourself and the people around you with *SportStack*.
