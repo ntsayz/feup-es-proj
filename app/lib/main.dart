@@ -268,7 +268,16 @@ class _LoginScreenState extends State<LoginScreen>{
                 },
                 elevation: 0.0,
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: const Text("Login"),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
               ),
             ),
           ),

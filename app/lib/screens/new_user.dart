@@ -9,6 +9,7 @@ import 'package:trabalho/main.dart';
 import 'package:trabalho/backend/Groups.dart';
 import 'package:trabalho/screens/profile_screen.dart';
 import 'package:trabalho/screens/user_info.dart';
+import 'package:trabalho/screens/components/appicon.dart';
 
 class NewUser extends StatefulWidget {
   const NewUser({Key? key}) : super(key: key);
@@ -33,7 +34,6 @@ class _NewUserState extends State<NewUser> {
       return true;
     },
     child: Scaffold(
-          appBar: AppBar(title: const Text("CREATE YOUR USER")),
       body: FutureBuilder(
         future: _initializeFirebase(),
         builder: (context, snapshot){
@@ -100,72 +100,113 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
     return Padding(
       padding: const EdgeInsets.all (16.0),
-      child: Column(
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text("Enter your email"),
-          TextField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
+          Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                appiconWidget(),
+                Text(
+                  'SportsStack',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                // Insert appiconWidget() here
+              ],
+            ),
+          ),
+          const SizedBox(height: 140,),
+          Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Color.fromRGBO(241, 245, 244, 1),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
                 hintText: "USER EMAIL",
-                prefixIcon: Icon(Icons.mail)
+                prefixIcon: Icon(Icons.mail),
+              ),
             ),
           ),
           const SizedBox(
               height: 20
           ),
-          const Text("Enter your password"),
-          TextField(
+          Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Color.fromRGBO(241, 245, 244, 1),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
               obscureText: _isObscured,
               controller: _passwordController,
               decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: _isObscured
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _isObscured = !_isObscured;
-                      });
-                    },
-                  ),
-                  hintText: "PASSWORD",
-                  prefixIcon: Icon(Icons.lock)
-              )
+                suffixIcon: IconButton(
+                  icon: _isObscured ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                ),
+                hintText: "PASSWORD",
+                prefixIcon: Icon(Icons.lock),
+              ),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          const Text("Confirm your password"),
-          TextField(
+          Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Color.fromRGBO(241, 245, 244, 1),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
               obscureText: _isObscured2,
               controller: _passwordController2,
               decoration: InputDecoration(
-                  hintText: "CONFIRM PASSWORD",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: _isObscured2
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _isObscured2 = !_isObscured2;
-                      });
-                    },
-                  )
-              )
+                hintText: "CONFIRM PASSWORD",
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                  icon: _isObscured2 ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured2 = !_isObscured2;
+                    });
+                  },
+                ),
+              ),
+            ),
           ),
           const SizedBox(
-            height: 30,
+            height: 90,
           ),
           SizedBox(
-              width: double.infinity,
+              width: 300,
+              height: 60,
               child: RawMaterialButton(
-                fillColor: Colors.blue,
+                fillColor: Color.fromRGBO(246, 185, 93, 1),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)
+                    borderRadius: BorderRadius.circular(20.0)
                 ),
                 onPressed: () async {
 
@@ -281,8 +322,16 @@ class _NewUserScreenState extends State<NewUserScreen> {
             },
             elevation: 0.0,
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-
-            child: const Text("Create User"),
+                child: const Text(
+                  "Create User",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
 
 
           )
@@ -290,7 +339,6 @@ class _NewUserScreenState extends State<NewUserScreen> {
 
         ],
       ),
-
 
     );
 
