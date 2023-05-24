@@ -220,12 +220,7 @@ class _LoginScreenState extends State<LoginScreen>{
                   borderRadius: BorderRadius.circular(25.0),
                 ),
                 onPressed: () async {
-                  User? user = await loginUsingEmailPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    birthDate: "1990-01-01",
-                    context: context,
-                  );
+                  User? user = await AuthService.loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, birthDate: "1990-01-01",context: context);
                   print(user);
 
                   if (user != null) {
@@ -307,3 +302,37 @@ class _LoginScreenState extends State<LoginScreen>{
   }
 
 }
+
+class AuthService {
+  static Future<User?> loginUsingEmailPassword({required String email, required String password, required String birthDate, required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
+      user = userCredential.user;
+      if (user != null) {
+        // add birthdate to user data
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'birthdate': birthDate,
+        }, SetOptions(merge: true));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        print("No user found for that email");
+      }
+    }
+
+    return user;
+  }
+}
+
+class Utils {
+  static bool isValidEmail(String? email) {
+    return RegExp(
+      r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
+    ).hasMatch(email!);
+  }
+}
+
+
