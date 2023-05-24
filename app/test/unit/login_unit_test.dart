@@ -5,8 +5,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-class MockUserCredential extends Mock implements UserCredential {}
-class MockUser extends Mock implements User {}
+class MockUser extends Mock implements User {
+  final String uid = 'testUid';
+}
+
+class MockUserCredential extends Mock implements UserCredential {
+  final MockUser user = MockUser();
+
+}
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
@@ -17,14 +23,14 @@ void main() {
   late MockBuildContext mockBuildContext;
 
   setUp(() {
-
     mockFirebaseAuth = MockFirebaseAuth();
     mockUserCredential = MockUserCredential();
-    mockUser = MockUser();
+    mockUser = mockUserCredential.user;
     mockBuildContext = MockBuildContext();
 
-    when(mockUserCredential.user).thenReturn(mockUser);
-    when(mockUser.uid).thenReturn('testUid');
+    when(mockFirebaseAuth.signInWithEmailAndPassword(email: 'testEmail', password: 'testPassword'))
+        .thenAnswer((_) async => mockUserCredential);
+
   });
 
 
