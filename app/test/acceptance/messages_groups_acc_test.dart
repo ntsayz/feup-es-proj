@@ -13,13 +13,9 @@ void main() {
     });
 
     testWidgets("Messaging test", (WidgetTester tester) async {
-      // Start the app
+
       await tester.pumpWidget(MyApp());
 
-      // Assuming the user is already logged in, navigate to MessagesScreen
-      // ...insert navigation code here...
-
-      // Find the TextField to enter a message
       final Finder messageField = find.byKey(Key('message_field'));
 
       // Enter a message
