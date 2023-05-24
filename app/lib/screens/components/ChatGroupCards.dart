@@ -271,6 +271,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   children: [
                     Expanded(
                       child: TextField(
+                        key: Key('message_field'),
                         controller: _messageController,
                         decoration: InputDecoration(
                           hintText: "Type your message...",
@@ -281,6 +282,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                       ),
                     ),
                     IconButton(
+                      key: Key('send_button'),
                       icon: Icon(Icons.send),
                       onPressed: () async {
                         String content = _messageController.text.trim();

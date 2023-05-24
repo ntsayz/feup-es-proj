@@ -107,8 +107,20 @@ class _NewUserScreenState extends State<NewUserScreen> {
           Align(
             alignment: Alignment.center,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  child: IconButton(
+                    iconSize: 30,
+                    icon: Icon(Icons.arrow_back, color: Color.fromRGBO(246, 185, 93, 1),),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
+                    },
+                  ),
+                ),
+                const SizedBox(width: 45,),
                 appiconWidget(),
                 Text(
                   'SportsStack',
@@ -123,6 +135,8 @@ class _NewUserScreenState extends State<NewUserScreen> {
               ],
             ),
           ),
+
+
           const SizedBox(height: 140,),
           Container(
             width: double.infinity,
@@ -206,7 +220,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
               child: RawMaterialButton(
                 fillColor: Color.fromRGBO(246, 185, 93, 1),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)
+                    borderRadius: BorderRadius.circular(25.0)
                 ),
                 onPressed: () async {
 
