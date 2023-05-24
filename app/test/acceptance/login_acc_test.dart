@@ -3,9 +3,18 @@ import 'package:gherkin/gherkin.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_test/flutter_test.dart' hide find;
 
-void main(){
-  LoginSteps();
+void main() {
+  final config = FlutterTestConfiguration()
+    ..features = [RegExp('tests/acceptance/features/*.*.feature')]
+    ..reporters = [ProgressReporter()]
+    ..hooks = []
+    ..stepDefinitions = [LoginSteps(), LoginButtonStep(), SuccessfulLoginStep(), UserIDStep()]
+    ..targetAppPath = "lib/main.dart";
+
+  final runner = GherkinRunner();
+  runner.execute(config).then((_) => print("Test completed"));
 }
+
 
 
 
