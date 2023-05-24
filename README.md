@@ -15,7 +15,6 @@ You can find here detailed about the SportStack application, hereby mentioned as
   * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#physical-architecture)
   * [Prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ArchitectureAndDesign.md#prototype)
 * [Implementation](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/tree/main/app)
-* [Configuration and change management (TODO)]()
 * [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/main/docs/ProjectManagement.md)
 
 

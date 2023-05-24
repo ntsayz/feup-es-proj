@@ -76,6 +76,7 @@ For this final iteration and taking in account we had several things unfinished 
 divide between our members who were working, to try to get the maximum of our work. So, we focused on the tests 
 and finishing what we could of our app and finish also all the documentation.
 
+![Iteration Backlog after iteration 4](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d4f15c2d476539e0e78841d4c3a1f028c099a661/images/Board_Iteration_4.png)
 
 
 #### *Retrospective*
@@ -83,7 +84,7 @@ and finishing what we could of our app and finish also all the documentation.
 In this iteration we were very focused on documentation left and test that we didn't do, and not in incrementing 
 value to our app, just correcting some bugs of the existing features. We were able to organize and update 
 all of the documentation left and correct some issues we had in the already existing documentation.
-For the tests, 
+As for the tests, we were able to do both unit and acceptance test.
 
 
 
@@ -108,5 +109,6 @@ You can find below information and references related with the project managemen
 * Backlog management: Product backlog and Iteration backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2022-23/projects/19/views/1);
 * Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
 * Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2);
-* Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3)
+* Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3);
+* Release management: [v1.0] ()
 
