@@ -73,25 +73,32 @@ their comments and evaluations by other users.
 #### **Iteration 4**
 
 For this final iteration and taking in account we had several things unfinished in our work, we tried to
-divide between our members who were working, to try to get the maximum of our work. So, we focused on the tests
-finishing what we could of our app and finish also all the documentation.
+divide between our members who were working, to try to get the maximum of our work. So, we focused on the tests 
+and finishing what we could of our app and finish also all the documentation.
 
 
 
 #### *Retrospective*
 
+In this iteration we were very focused on documentation left and test that we didn't do, and not in incrementing 
+value to our app, just correcting some bugs of the existing features. We were able to organize and update 
+all of the documentation left and correct some issues we had in the already existing documentation.
+For the tests, 
 
 
 
 
 
-
-#### *Final Thoughts*
+#### *Final Thoughts and global Retrospective*
 Now that the work is all done and delivered, the active members of our group can by far say that we were 
 penalized by the lack of commitment by the other members. From the first iteration to the last only 3
-of our members helped actively in the development of the work, and that made things far more dificult to our group.
-
-
+of our members helped actively in the development of the work, and that made things far more difficult to our group.
+Apart from that, between us, despite our not so good communication, we were able to split the work between us 
+and try to get out the best we could. The app didn't took a linear progress and it's not a top-notch app,
+but overall it does some things of what we proposed ourselves to do and has its own market value and is 
+adds value to the end user. 
+Globally, this was a nice journey and we were able to overcome the difficulties we were getting along the way.
+Even though our app does not have a top notch design, it is user friendly and has a value to the end user.
 
 
 

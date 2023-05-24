@@ -3,29 +3,34 @@
 
 ### Vision Statement
 
-Tens aquele amigo que desmarca à última da hora e te deixa pendurado? Não te preocupes, com **SportStack** fazemos com que a tua atividade não seja adiada ou cancelada.
-Lança convites na app para outras pessoas se juntarem nas mais diversas modalidades que temos à tua disposição.
-Basta escolheres a modalidade, hora, local e diverte-te.
+
+Do you have that one friend who always withdraws at the last minute and lets you hanging Don't worry, 
+with **SportStack** we help you not cancelling your activity. Create an event and send it to whatever 
+group you think is going to help you get that last player and you can still make it happen.
+If you just don't want go run by yourself, or go to the gym or cycling, no matter the sport you want to 
+practice we help you find rivals and teammates.
+Create the event, select the sport you want to play, choose the group you want to share with, day and time
+and let your friends join you.
+
 
 ### Main Features
 
-ID pessoal – contém informações sobre o usurário (ex. username, e-mail, palavra-passe, classificação (média de todas as avaliações dadas por outros utilizadores), número de telemóvel->opcional).
+Personal ID - information about the user (username, email, birthday, favorite sports)
 
-Desportos individuais – categoriza os diferentes tipos de desportos e atribui um número de participantes consoante o desporto em causa. Para desportos individuais (corrida) não há um limite de participantes; para desportos em equipa (padel, futebol, basquetebol, ginásio, corrida, ciclismo, andebol, hóquei, yoga, pilates) o número de participantes será o máximo estipulado para cada desporto.
+Events - Information about the event (sport, group, name of the event, day, time, and maximum capacity)
 
-Convites – conforme os desportos pré-selecionados pelo utilizador, este recebe um convite com as informações sobre o horário (intervalos de 30min), a localização (cidade) e o local concreto onde irá ocorrer o evento (Complexo Desportivo X / Ginásio Y) e qual o número de participantes necessários.
+Groups - Inside of the group we have users and events
 
-Interação de confirmação de presença – irá servir para confirmar a presença de um usuário num certo evento. Apenas pode haver um dado número de confirmações por evento sendo este número pré-definido anteriormente (ex. botão, swipe, tick-box, etc.).
+Maps - should be available an option to select where the event is taking place and see in map the events around me by their location
 
-Interação de anulação de presença – será libertada uma vaga e posteriormente o criador será alertado da desistência de um dos participantes do evento.
+Presence confirmation - There is a button for each event that allows the user to participate in that event and decreases the capacity of the event
 
-Chat entre elementos – chat criado entre o grupo de utilizadores que concordou participar no evento.
+Places - given the sports selected as favorite there is a screen with suggested places to practice and evaluations by other users
 
-Perfil de empresas – cada complexo desportivo/ginásio pode ter um perfil na app para criar publicações onde informem os utilizadores da possibilidade de reserva do seu espaço.
-
-Mapa - interface onde se pode ver a localização e as diferentes informações das várias atividades.
+Group messages - For each group there should be a chat available so people can talk about some event coming
+or just talking about a past event or make proper arrangements to an event taking place in a near future.
 
 ### Assumptions and dependencies
-- Internet: manter a app atualizada sempre que ocorrem novas atividades.
-- OpenStreetMap: para criar o mapa onde é possível ver as atividades que irão decorrer num futuro próximo (cada uma delas marcada com um pin).
-- Firebase: guardar os dados de acesso de cada utilizador.
+- Internet: Keep the app running and so that the connection to the database can be done and present the latest information.
+- OpenStreetMap: In order to have a map screen.
+- Firebase: Data base to keep all the data about the users, groups, events and so on.
