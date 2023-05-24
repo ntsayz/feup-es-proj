@@ -24,6 +24,12 @@ As a user I want to be able to login to the app with my credentials. If I don't 
 <img width="200" alt="Captura de ecrã 2023-03-16, às 15 53 16" src="https://user-images.githubusercontent.com/93987310/225676825-65438809-1681-4454-a891-455314fd7610.png">
 
 
+**Screen to recover password**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_recover_password.png">
+
+
+
 **Story#2**
 
 As a user I want to be able to create a new event and decide what kind of sport I can play, location, time, and teammates. If I don't want to create a new one, I can join one that already exists.
@@ -43,7 +49,7 @@ As a user I want to be able to create a new event and decide what kind of sport 
 
 **Screen to create the event**
 
-<img width="200" alt="Captura de ecrã 2023-03-16, às 16 15 47" src="https://user-images.githubusercontent.com/93987310/225685375-e238fb11-7052-469e-b8a7-bb89e98e15dc.png">
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_create_event.png">
 
 
 **Story#3**
@@ -58,23 +64,72 @@ As a user I want to be able to see what are the best places to do my sport and v
 <img width="200" alt="Captura de ecrã 2023-03-16, às 16 24 16" src="https://user-images.githubusercontent.com/93987310/225686528-f759e707-946c-4075-accf-54e4d8511384.png">
 
 
-**Story#4**
-
-As a user I want to be able to create a team, look at my team-stats and the sports we usually do. By clicking on my profile picture I can directly access my profile where I can edit my date of birth, the sports I want to practice and my location. 
-
-**User interface mock-up**
-
-
-**Screen to create and see my teams**
-
-<img width="200" alt="Captura de ecrã 2023-03-16, às 16 55 06" src="https://user-images.githubusercontent.com/93987310/225694766-085bc910-ede7-497a-80aa-beb846b08467.png">
-
+**Story#**
+As a user I want to be able to see and change informations about me, like my favourite sports,
+my username, and others.
 
 
 
 **User Profile**
 
 <img width="200" alt="Captura de ecrã 2023-03-16, às 16 53 41" src="https://user-images.githubusercontent.com/93987310/225694480-c893c8db-d43b-47e7-8148-8dbedea862ea.png">
+
+
+**Story#5**
+
+As a user i want to send and receive messages from my groups so that we can talk inside our group
+
+**Screen to see all messages from all groups**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/ddb8b7c35fa8689712eac8e63065b87a8affe4b3/images/mock_messages%20screen.png">
+
+**Screen to see all messages sent and received from a group**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/ddb8b7c35fa8689712eac8e63065b87a8affe4b3/images/mock_message_group.png">
+
+
+
+**Story#6**
+
+As a User i want to be part of a group that share mutual interests so that we can join events together
+
+**Screen where all groups are listed**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_group_screen.png">
+
+
+**Screen where I can see the events of the group**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_inside_group_screen.png">
+
+
+**Screen where I can see all users of the group**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_users_of_group.png">
+
+
+**Screen where I can add elements to the group**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_add_element_group.png">
+
+
+**Screen to remove elements of a group**
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_remove_elements_group.png">
+
+
+
+**Story#7**
+As a user I want to see in a map where events are taking place 
+
+<img width="200" src = "https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/d87c71a0365a19ad1b9487664d1926887b584725/images/mock_location_page.png">
+
+
+
+
+
+
+
 
 
 
@@ -84,6 +139,6 @@ As a user I want to be able to create a team, look at my team-stats and the spor
 
 
  <p align="center" justify="center">
-  <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/97bbba905bd0aaa1e48f22fefe504c88b13474e4/images/DomainModel.png"/>
+  <img src="https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/blob/2757c517d1e5958e762f33cf05e26f9cb9f1ef7d/images/Domain_model.png"/>
 </p>
 
