@@ -28,29 +28,61 @@ class _ResetScreenState extends State<ResetScreen> {
         return true;
         },
       child: Scaffold(
-        appBar: AppBar(title: const Text("RESET PASSWORD"),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: Container(
+            color: Colors.white,
+            child: Row(
+              children: [
+                const SizedBox( height: 130,),
+                Container(
+                  width: 50,
+                  height: 50,
+                  child: IconButton(
+                    iconSize: 30,
+                    icon: Icon(Icons.arrow_back, color: Color.fromRGBO(246, 185, 93, 1),),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         body: Column(
           children: [
-            const Padding(padding: EdgeInsets.all(20.0),
-              child: Text("Enter your mail"),),
-
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                    hintText: "USER EMAIL",
-                    prefixIcon: Icon(Icons.mail)
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: Container(
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color.fromRGBO(241, 245, 244, 1),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: "USER EMAIL",
+                      prefixIcon: Icon(Icons.mail),
+                    ),
+                  ),
                 ),
+              ),
             ),
-      const SizedBox(height: 20,),
+      const SizedBox(height: 40,),
       SizedBox(
-
-      width: 150,
+          width: 300,
+          height: 60,
       child: RawMaterialButton(
-      fillColor: Colors.blue,
+        fillColor: Color.fromRGBO(246, 185, 93, 1),
       shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12.0)
+      borderRadius: BorderRadius.circular(25.0)
       ),
       onPressed: () async {
         auth.sendPasswordResetEmail(email: _emailController.text);
@@ -78,7 +110,16 @@ class _ResetScreenState extends State<ResetScreen> {
       },
         elevation: 0.0,
         padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: const Text("Send Request"),
+        child: const Text(
+          "Send Request",
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Roboto',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+        ),
       ))
           ],
         ),
