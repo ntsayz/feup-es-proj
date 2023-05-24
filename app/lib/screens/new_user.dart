@@ -206,7 +206,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
               child: RawMaterialButton(
                 fillColor: Color.fromRGBO(246, 185, 93, 1),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)
+                    borderRadius: BorderRadius.circular(25.0)
                 ),
                 onPressed: () async {
 
