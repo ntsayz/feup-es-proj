@@ -56,75 +56,78 @@ class _UserInformationsState extends State<UserInformations> {
     return WillPopScope(
       onWillPop: () async{ return false;},
       child: Scaffold(
-        appBar: CustomAppBar(title: ("USER INFO"),),
+        appBar: AppBar(title:const Text ("USER INFO"),
+          backgroundColor: Color(0xFFF6B95D),
+          automaticallyImplyLeading: false,
+        ),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
             child:
             Column(
-          children: [
-            const Padding(padding: EdgeInsets.all(20.0),
-              child: Text("Enter your full name"),),
+              children: [
+                const Padding(padding: EdgeInsets.all(20.0),
+                  child: Text("Enter your full name"),),
 
-            TextFormField(
-              controller: _fullNameController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                  hintText: "Full name",
-                  prefixIcon: Icon(Icons.person)
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(20.0),
-              child: Text("Enter your phone number"),),
-
-            TextFormField(
-              controller: _phoneNumber,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                  hintText: "Phone Number",
-                  prefixIcon: Icon(Icons.phone)
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(20.0),
-              child: Text("Enter your username"),),
-
-            TextFormField(
-              controller: _usernameController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                  hintText: "User name",
-                  prefixIcon: Icon(Icons.person)
-              ),
-            ),
-
-
-            const Padding(padding: EdgeInsets.all(20.0),
-              child: Text("Enter your Birth Date"),),
-            TextFormField(
-              controller: _dateController,
-              decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
-                  icon: Icon(Icons.calendar_today)),
-              readOnly: true,
-              onTap: () => _ShowDatePicker(),
-            ),
-
-
-            SizedBox(height: 35,),
-            RawMaterialButton(
-                padding: EdgeInsets.all(20.0),
-                fillColor: Colors.blue,
-                child: const Text('Confirm',
-                  style: TextStyle(fontSize: 20),),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)
+                TextFormField(
+                  controller: _fullNameController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                      hintText: "Full name",
+                      prefixIcon: Icon(Icons.person)
+                  ),
                 ),
-                onPressed: () {
-                    addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim(),widget.user);
+                const Padding(padding: EdgeInsets.all(20.0),
+                  child: Text("Enter your phone number"),),
 
-                })
+                TextFormField(
+                  controller: _phoneNumber,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      hintText: "Phone Number",
+                      prefixIcon: Icon(Icons.phone)
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.all(20.0),
+                  child: Text("Enter your username"),),
+
+                TextFormField(
+                  controller: _usernameController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                      hintText: "User name",
+                      prefixIcon: Icon(Icons.person)
+                  ),
+                ),
 
 
-          ],
-        )),
+                const Padding(padding: EdgeInsets.all(20.0),
+                  child: Text("Enter your Birth Date"),),
+                TextFormField(
+                  controller: _dateController,
+                  decoration: InputDecoration(hintText: formatter.format(DateTime.now()) ,
+                      icon: Icon(Icons.calendar_today)),
+                  readOnly: true,
+                  onTap: () => _ShowDatePicker(),
+                ),
+
+
+                SizedBox(height: 35,),
+                RawMaterialButton(
+                    padding: EdgeInsets.all(20.0),
+                    fillColor: Color(0xFFF6B95D),
+                    child: const Text('Confirm',
+                      style: TextStyle(fontSize: 20),),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)
+                    ),
+                    onPressed: () {
+                      addUserDetails(context, _dateTime , widget.uid, _fullNameController.text.trim(), _phoneNumber.text.trim(), _usernameController.text.trim(),widget.user);
+
+                    })
+
+
+              ],
+            )),
 
 
 
@@ -212,18 +215,18 @@ addUserDetails (BuildContext context, DateTime date, String uid, String name, St
 
 usernameAvaible (String name) async {
   final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-      await FirebaseFirestore.instance.collection('user').get();
+  await FirebaseFirestore.instance.collection('user').get();
   final List<String?> fieldValues = querySnapshot.docs
       .map((DocumentSnapshot<Map<String, dynamic>> document) => document.data()!['Username'] as String?)
       .where((String? fieldValue) => fieldValue != null)
       .toList();
 
 
-   if (fieldValues.contains(name)){
-     return false;
-   }
+  if (fieldValues.contains(name)){
+    return false;
+  }
 
-   return true;
+  return true;
 }
 
 phoneNumberUsed (String phone) async{
