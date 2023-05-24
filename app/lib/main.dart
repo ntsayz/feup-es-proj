@@ -8,6 +8,7 @@ import 'package:trabalho/screens/home.dart';
 import 'package:trabalho/screens/reset_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:trabalho/screens/components/appicon.dart';
 
 
 
@@ -117,100 +118,177 @@ class _LoginScreenState extends State<LoginScreen>{
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 120,),
-          const Text("Enter your mail"),
-          TextField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-                hintText: "USER EMAIL",
-                prefixIcon: Icon(Icons.mail)
+          Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                appiconWidget(),
+                Text(
+                  'SportsStack',
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                 // Insert appiconWidget() here
+              ],
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Text("Enter your password"),
-          TextFormField(
-            obscureText: _isObscured,
-            controller: _passwordController,
-            decoration: InputDecoration(
-                hintText: "PASSWORD",
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: _isObscured
-                      ?const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off),
-                  onPressed: () {
-                    setState(() {
-                      _isObscured =!_isObscured;
-                    });
-                  },
-                )),
+          const SizedBox(height: 120,),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    width: 300,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromRGBO(241, 245, 244, 1),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: "USER EMAIL",
+                        prefixIcon: Icon(Icons.mail),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    width: 300,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromRGBO(241, 245, 244, 1),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      obscureText: _isObscured,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        hintText: "PASSWORD",
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: _isObscured ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscured = !_isObscured;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          InkWell(
-            child: const Text ("FORGOT YOUR PASSWORD?", style: TextStyle(color: Colors.blueAccent),),
-            onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const ResetScreen())),
-
+          Container(
+            alignment: Alignment(-0.5,1.0),
+            child: InkWell(
+              child: const Text(
+                "FORGOT YOUR PASSWORD?",
+                style: TextStyle(color: Colors.grey),
+              ),
+              onTap: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const ResetScreen()),
+              ),
+            ),
           ),
 
           const SizedBox(
             height: 80,
           ),
-          Container(
-            width: double.infinity,
-            child: RawMaterialButton(
-              fillColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)
-              ),
-              onPressed: () async {
-                User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, birthDate: "1990-01-01",context: context);
-                print (user);
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 300,
+              height: 60,
+              child: RawMaterialButton(
+                fillColor: Color.fromRGBO(246, 185, 93, 1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onPressed: () async {
+                  User? user = await loginUsingEmailPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    birthDate: "1990-01-01",
+                    context: context,
+                  );
+                  print(user);
 
-                if (user!=null){
-
-                  /* to be changed top main screen*/            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen(uid: user.uid.toString(),user: user,)));
-                }
-                else{
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Container(
-                        height: 90,
-                        decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                        child:
-                        Row(
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(uid: user.uid.toString(), user: user),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Container(
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          ),
+                          child: Row(
                             children: [
-                              const SizedBox( width: 35,),
-                              Expanded(child: Row(
-                                children: const [
-                                  Text("ENTER A VALID COMBINATION", style: TextStyle(fontSize: 18, color: Colors.white),)
+                              const SizedBox(width: 35),
+                              Expanded(
+                                child: Row(
+                                  children: const [
+                                    Text(
+                                      "ENTER A VALID COMBINATION",
+                                      style: TextStyle(fontSize: 18, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                      ),
+                    );
+                  }
+                },
+                elevation: 0.0,
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
+              ),
+            ),
+          ),
 
-                                ],
-                              ) )
-                            ]
-                        )
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                  ));
-                }
-              },
-              elevation: 0.0,
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: const Text("Login"),
-            )
-            ,),
           const SizedBox(
             height: 100,
           ),
           Align(
               alignment: Alignment.center,
               child: InkWell(
-                child: const Text("DON'T HAVE A USER YET", style: TextStyle(color: Colors.blueAccent),),
+                child: const Text("Don't have an account? Create user.", style: TextStyle(color: Colors.grey),),
                 onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewUser())),
 
               )
