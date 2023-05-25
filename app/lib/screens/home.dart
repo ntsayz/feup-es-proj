@@ -27,34 +27,34 @@ class MainScreen extends StatefulWidget {
   Map<String, dynamic>? userData;
 
   List<Map<String, dynamic>>_event_group_list =  [
-  {
-    "name": "Grupo de Futebol",
-    "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-    "capacity": 12,
-    "messages":{
-      "sender":"ntsaz",
-      "content":"hey what's up",
-      "time":"2023-04-12-22:25:28"
-    },}
-  ,{
-    "name": "Grupo de Andebol",
-    "participants": {"alice123","tiago5","guilherme"},
-    "capacity": 4,
-    "messages":{
-      "sender":"guilherme",
-      "content":"cheguei",
-      "time":"2023-04-12-22:25:28"
-    },
-  },{
-    "name": "Corrida",
-    "participants": {"alice123","tiago5"},
-    "capacity": 3,
-    "messages":{
-      "sender":"alice123",
-      "content":"olá,tudo bem?",
-      "time":"2023-04-12-22:25:28"
-    },
-  },{
+    {
+      "name": "Grupo de Futebol",
+      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
+      "capacity": 12,
+      "messages":{
+        "sender":"ntsaz",
+        "content":"hey what's up",
+        "time":"2023-04-12-22:25:28"
+      },}
+    ,{
+      "name": "Grupo de Andebol",
+      "participants": {"alice123","tiago5","guilherme"},
+      "capacity": 4,
+      "messages":{
+        "sender":"guilherme",
+        "content":"cheguei",
+        "time":"2023-04-12-22:25:28"
+      },
+    },{
+      "name": "Corrida",
+      "participants": {"alice123","tiago5"},
+      "capacity": 3,
+      "messages":{
+        "sender":"alice123",
+        "content":"olá,tudo bem?",
+        "time":"2023-04-12-22:25:28"
+      },
+    },{
       "name": "Ténis na Prelada",
       "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
       "capacity": 6,
@@ -98,15 +98,15 @@ class _MainScreenState extends State<MainScreen> {
       // Navigate back to the login screen
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
-        setData();
+      setData();
     }
   }
 
-   void getEventsData() async {
-      FirebaseFirestore.instance.collection('Event').get().then((querySnapshot) {
-        widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
-      });
-    }
+  void getEventsData() async {
+    FirebaseFirestore.instance.collection('Event').get().then((querySnapshot) {
+      widget._event_group_list = querySnapshot.docs.map((doc) => doc.data()).toList();
+    });
+  }
 
 
 
@@ -186,7 +186,7 @@ class _MainScreenState extends State<MainScreen> {
                   EventCards(dataList: widget._event_group_list,),
                   YellowButton(text:"CREATE EVENT",height: 80,width: double.infinity,onItemTapped: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateEventScreen(uid: widget.uid,) ));}
-    ),
+                  ),
                 ],
               ),
               MyTeams(uid: widget.uid, userData: widget.userData),

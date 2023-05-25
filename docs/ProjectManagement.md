@@ -110,5 +110,5 @@ You can find below information and references related with the project managemen
 * Release management: [v0.1](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.1);
 * Release management: [v0.2](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.2);
 * Release management: [v0.3](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v0.3);
-* Release management: [v1.0] ()
+* Release management: [v1.0](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T5/releases/tag/v1.0)
 
