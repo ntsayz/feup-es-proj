@@ -24,54 +24,7 @@ class MainScreen extends StatefulWidget {
   MainScreen({Key? key, required this.uid, required this.user}) : super(key: key);
   Map<String, dynamic>? userData;
 
-  List<Map<String, dynamic>>_event_group_list =  [
-  {
-    "name": "Grupo de Futebol",
-    "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-    "capacity": 12,
-    "messages":{
-      "sender":"ntsaz",
-      "content":"hey what's up",
-      "time":"2023-04-12-22:25:28"
-    },}
-  ,{
-    "name": "Grupo de Andebol",
-    "participants": {"alice123","tiago5","guilherme"},
-    "capacity": 4,
-    "messages":{
-      "sender":"guilherme",
-      "content":"cheguei",
-      "time":"2023-04-12-22:25:28"
-    },
-  },{
-    "name": "Corrida",
-    "participants": {"alice123","tiago5"},
-    "capacity": 3,
-    "messages":{
-      "sender":"alice123",
-      "content":"olá,tudo bem?",
-      "time":"2023-04-12-22:25:28"
-    },
-  },{
-      "name": "Ténis na Prelada",
-      "participants": {"alice123","tiago5","joao2001","dthedestroyer"},
-      "capacity": 6,
-      "messages":{
-        "sender":"ntsaz",
-        "content":"hey what's up",
-        "time":"2023-04-12-22:25:28"
-      },
-    },{
-      "name": "Karting Matosinhos",
-      "participants": {"alice123","tiago5","joao2001",},
-      "capacity": 8,
-      "messages":{
-        "sender":"tiago5",
-        "content":"hey what's up",
-        "time":"2023-04-12-22:25:28"
-      },
-    }
-  ];
+  List<Map<String, dynamic>>_event_group_list =  [];
 
 
   @override
@@ -97,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
     }else{
         setData();
+        getEventsData();
     }
   }
 
