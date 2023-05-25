@@ -95,6 +95,18 @@ class _GroupScreenState extends State<GroupScreen> {
                               // while the future is still running, show a loading indicator
                               return Center(child: CircularProgressIndicator());
                             }
+                            else if (!snapshot.hasData){
+                              return Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    Text("You don´t have any Events yet. Create one if you want"),
+                                    SizedBox(height: 16),
+
+                                  ],
+                                ),
+                              );
+                            }
                             else{
                               List<String> events = snapshot.data!;
                               return Expanded(
