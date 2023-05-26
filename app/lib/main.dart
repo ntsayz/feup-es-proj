@@ -152,6 +152,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      key: Key("emailField"),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -170,6 +171,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TextFormField(
+                      key: Key("passwordField"),
                       obscureText: _isObscured,
                       controller: _passwordController,
                       decoration: InputDecoration(
@@ -215,6 +217,7 @@ class _LoginScreenState extends State<LoginScreen>{
               width: 300,
               height: 60,
               child: RawMaterialButton(
+                key: Key("submitButton"),
                 fillColor: Color.fromRGBO(246, 185, 93, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),

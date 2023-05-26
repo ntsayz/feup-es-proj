@@ -36,19 +36,26 @@ Future<void> addEventToGroup (String event, String groupID) async{
 
 DateTime joinDateTimeWithTime(DateTime date, TextEditingController timeController) {
   final DateFormat timeFormat = DateFormat.jm();
-  final DateTime parsedTime = timeFormat.parse(timeController.text);
-  final DateTime combinedDateTime = DateTime(
-    date.year,
-    date.month,
-    date.day,
-    parsedTime.hour,
-    parsedTime.minute,
-    date.second,
-    date.millisecond,
-    date.microsecond,
-  );
-  return combinedDateTime.toLocal(); // Convert to local timezone
+
+  try {
+    final DateTime parsedTime = timeFormat.parse(timeController.text);
+    final DateTime combinedDateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      parsedTime.hour,
+      parsedTime.minute,
+      date.second,
+      date.millisecond,
+      date.microsecond,
+    );
+    return combinedDateTime.toLocal(); // Convert to local timezone
+  } catch (e) {
+    print('Error parsing time: $e');
+    return DateTime.now(); // Return a default value or handle the error as needed
+  }
 }
+
 
 Future<String?> getEventName (String ID) async{
   // Get a reference to the Firestore collection
